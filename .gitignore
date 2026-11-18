@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.env
+venv/
+.venv/
+env/
+
+# Databases
+*.db
+*.sqlite3
+
+# Logs & temporary files
+*.log
+live_tunnel.log
+ssh_tunnel.log
+tunnel.log
+public_url.txt
+
+# Binaries
+cloudflared.exe
+*.zip
+
+# Local helper scripts
+git_sync.py
+clean_push.py

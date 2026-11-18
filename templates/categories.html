@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Collections & Occasions | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner">
+  <h2>Shop by Occasion & Silhouette</h2>
+  <p>Handcrafted ethnic couture tailored for every regal celebration</p>
+</div>
+
+<div class="site-container" style="margin: 40px auto 80px;">
+  <div class="categories-grid">
+    <!-- Occasion 1: Wedding -->
+    <a href="/shop?occasion=Wedding" class="checkout-card" style="text-decoration: none; color: inherit; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="height: 320px; overflow: hidden; position: relative;">
+        <img src="/static/images/lehenga-maroon.jpg" alt="Wedding Ensembles" style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" />
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(56, 26, 34, 0.82), rgba(56, 26, 34, 0.15) 50%, transparent 80%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 24px; right: 24px; color: #FFF;">
+          <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Heirloom Couture</span>
+          <h3 style="font-family: var(--font-serif); font-size: 24px;">Royal Wedding Edit</h3>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">Opulent raw silk lehengas, heavily embroidered bridal cholis, and royal dupattas with antique zardozi work.</p>
+        <span style="font-size: 12px; font-weight: 700; color: var(--color-burgundy); margin-top: 10px; display: inline-block;">EXPLORE WEDDING →</span>
+      </div>
+    </a>
+
+    <!-- Occasion 2: Festive -->
+    <a href="/shop?occasion=Festive" class="checkout-card" style="text-decoration: none; color: inherit; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="height: 320px; overflow: hidden; position: relative;">
+        <img src="/static/images/saree-mauve.jpg" alt="Festive Sarees" style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" />
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(56, 26, 34, 0.82), rgba(56, 26, 34, 0.15) 50%, transparent 80%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 24px; right: 24px; color: #FFF;">
+          <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Eid & Festivities</span>
+          <h3 style="font-family: var(--font-serif); font-size: 24px;">Embellished Sarees</h3>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">Whisper-weight organza sarees, gotta patti embroidery, and lightweight festive drapery.</p>
+        <span style="font-size: 12px; font-weight: 700; color: var(--color-burgundy); margin-top: 10px; display: inline-block;">EXPLORE FESTIVE →</span>
+      </div>
+    </a>
+
+    <!-- Occasion 3: Mehendi -->
+    <a href="/shop?occasion=Mehendi" class="checkout-card" style="text-decoration: none; color: inherit; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="height: 320px; overflow: hidden; position: relative;">
+        <img src="/static/images/anarkali-yellow.jpg" alt="Mehendi Kurtas" style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" />
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(56, 26, 34, 0.82), rgba(56, 26, 34, 0.15) 50%, transparent 80%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 24px; right: 24px; color: #FFF;">
+          <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Vibrant Hues</span>
+          <h3 style="font-family: var(--font-serif); font-size: 24px;">Mehendi & Mayun</h3>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">Flared 24-kali Anarkalis, emerald green shararas, and sunny marigold silk sets.</p>
+        <span style="font-size: 12px; font-weight: 700; color: var(--color-burgundy); margin-top: 10px; display: inline-block;">EXPLORE MEHENDI →</span>
+      </div>
+    </a>
+
+    <!-- Category 4: Silk Kurtas -->
+    <a href="/shop?category=Kurtas" class="checkout-card" style="text-decoration: none; color: inherit; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="height: 320px; overflow: hidden; position: relative;">
+        <img src="/static/images/kurta-forest.jpg" alt="Silk Kurtas" style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" />
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(56, 26, 34, 0.82), rgba(56, 26, 34, 0.15) 50%, transparent 80%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 24px; right: 24px; color: #FFF;">
+          <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Pure Chanderi</span>
+          <h3 style="font-family: var(--font-serif); font-size: 24px;">Handwoven Silk Kurtas</h3>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">Straight cut silk kurtas, tailored cigarette pants, and pure Banarasi brocade dupattas.</p>
+        <span style="font-size: 12px; font-weight: 700; color: var(--color-burgundy); margin-top: 10px; display: inline-block;">EXPLORE KURTAS →</span>
+      </div>
+    </a>
+
+
+
+    <!-- Category 5: Accessories / Potlis -->
+    <a href="/shop?category=Accessories" class="checkout-card" style="text-decoration: none; color: inherit; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="height: 320px; overflow: hidden; position: relative;">
+        <img src="/static/images/potli-gold.jpg" alt="Velvet Potlis" style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" />
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(56, 26, 34, 0.82), rgba(56, 26, 34, 0.15) 50%, transparent 80%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 24px; right: 24px; color: #FFF;">
+          <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Royal Evening Accessories</span>
+          <h3 style="font-family: var(--font-serif); font-size: 24px;">Handcrafted Velvet Potlis</h3>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">Plush silk velvet evening pouches detailed with micro-sequins, golden bead tassels, and zardozi embroidery.</p>
+        <span style="font-size: 12px; font-weight: 700; color: var(--color-burgundy); margin-top: 10px; display: inline-block;">EXPLORE POTLIS →</span>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
+

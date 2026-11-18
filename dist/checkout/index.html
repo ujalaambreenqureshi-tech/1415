@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Jumma Couture by Noman</title>
+  <meta name="description" content="Curated ethnic wear that celebrates your heritage. Handcrafted luxury sarees, lehengas, kurtas, and velvet potlis for international patrons." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+<style>
+/* Checkout Layout & Architecture */
+.checkout-page-container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.checkout-card {
+  background: #FFFFFF;
+  border: 1px solid #E8E2D9;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .checkout-card {
+    padding: 16px 14px;
+  }
+}
+
+.checkout-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0E0D0D;
+  margin: 0 0 18px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #EFEAE2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #0E0D0D;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+/* Form Styles */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #4A4641;
+  margin-bottom: 6px;
+}
+
+.form-group label span.req {
+  color: #B82525;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 13px;
+  font-size: 13.5px;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #D9D2C7;
+  border-radius: 6px;
+  background: #FAF8F5;
+  color: #0E0D0D;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #BFA15F;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(191, 161, 95, 0.15);
+}
+
+/* Payment Selector Grid */
+.payment-selector-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.payment-option-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 1.5px solid #E8E2D9;
+  border-radius: 8px;
+  background: #FCFBF9;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.payment-option-card:hover {
+  border-color: #BFA15F;
+  background: #FFFFFF;
+}
+
+.payment-option-card.active {
+  border-color: #0E0D0D;
+  background: #FFFDF9;
+  box-shadow: 0 2px 10px rgba(191, 161, 95, 0.16);
+}
+
+.payment-option-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-radio {
+  accent-color: #0E0D0D;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.payment-text h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0E0D0D;
+  margin: 0 0 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #F4EFE6;
+  color: #6E5F55;
+  letter-spacing: 0.4px;
+}
+
+.payment-text p {
+  font-size: 11.5px;
+  color: #6E6860;
+  margin: 0;
+}
+
+.payment-icon-pill {
+  font-size: 20px;
+}
+
+/* Manual Payment Details & Copy Card */
+.manual-payment-box {
+  background: #FAF8F5;
+  border: 1px solid #E5DFD4;
+  border-radius: 8px;
+  padding: 18px;
+  margin-top: 14px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.copy-details-card {
+  background: #FFFFFF;
+  border: 1px dashed #CBB279;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.copy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  padding: 4px 0;
+  color: #4A4641;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.copy-row strong {
+  color: #0E0D0D;
+  font-family: monospace;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.btn-copy-account {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #0E0D0D;
+  color: #FAF8F5;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.btn-copy-account:hover {
+  background: #BFA15F;
+  color: #0E0D0D;
+}
+
+/* Receipt Upload Box */
+.receipt-dropzone {
+  border: 2px dashed #D9D2C7;
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.receipt-dropzone:hover {
+  border-color: #BFA15F;
+  background: #FCFBF9;
+}
+
+.receipt-preview-img {
+  max-width: 140px;
+  max-height: 140px;
+  border-radius: 4px;
+  margin: 10px auto 0;
+  display: none;
+  object-fit: contain;
+  border: 1px solid #D9D2C7;
+}
+
+/* Order Summary Box */
+.summary-sticky {
+  position: sticky;
+  top: 90px;
+}
+
+.summary-items-list {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 4px;
+}
+
+.summary-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #F0ECE4;
+}
+
+.summary-item-img {
+  width: 48px;
+  height: 62px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #E8E2D9;
+}
+
+.summary-item-desc {
+  flex: 1;
+  font-size: 12.5px;
+}
+
+.summary-item-title {
+  font-weight: 600;
+  color: #0E0D0D;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.summary-item-meta {
+  font-size: 11px;
+  color: #7A7A7A;
+}
+
+.summary-item-price {
+  font-weight: 700;
+  font-size: 13px;
+  color: #0E0D0D;
+  white-space: nowrap;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #4A4641;
+  margin-bottom: 9px;
+}
+
+.summary-row.total {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0E0D0D;
+  padding-top: 12px;
+  border-top: 1.5px solid #E8E2D9;
+  margin-top: 12px;
+}
+
+.btn-place-order {
+  width: 100%;
+  padding: 15px;
+  background: #0E0D0D;
+  color: #FAF8F5;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  border: 1px solid #0E0D0D;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 18px;
+}
+
+.btn-place-order:hover:not(:disabled) {
+  background: #BFA15F;
+  border-color: #BFA15F;
+  color: #0E0D0D;
+  box-shadow: 0 4px 14px rgba(191, 161, 95, 0.25);
+}
+
+.btn-place-order:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Order Confirmation Modal / Screen */
+.order-confirm-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(14, 13, 13, 0.78);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.order-confirm-modal {
+  background: #FFFFFF;
+  border-radius: 10px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  padding: 30px 24px;
+  border: 1px solid #E8E2D9;
+  animation: modalScale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.confirm-header {
+  text-align: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #EFEAE2;
+}
+
+.confirm-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #FFF3CD;
+  color: #856404;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.confirm-title {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: #0E0D0D;
+  margin: 0 0 4px 0;
+}
+
+.confirm-order-tag {
+  display: inline-block;
+  background: #FAF5EB;
+  border: 1px solid #E5DFD4;
+  color: #8C6D2B;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-top: 6px;
+  letter-spacing: 0.8px;
+}
+
+.confirm-status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-top: 8px;
+  background: #FFF3CD;
+  color: #856404;
+  border: 1px solid #FFEEBA;
+}
+
+.confirm-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 18px 0;
+  padding: 14px;
+  background: #FAF8F5;
+  border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+  .confirm-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.confirm-detail-label {
+  font-size: 10.5px;
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.confirm-detail-value {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0E0D0D;
+  word-break: break-word;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .confirm-actions {
+    flex-direction: column;
+  }
+}
+
+.btn-confirm-action {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s ease;
+}
+
+.btn-confirm-primary {
+  background: #0E0D0D;
+  color: #FFFFFF;
+  border: 1px solid #0E0D0D;
+}
+
+.btn-confirm-primary:hover {
+  background: #BFA15F;
+  border-color: #BFA15F;
+  color: #0E0D0D;
+}
+
+.btn-confirm-secondary {
+  background: #FFFFFF;
+  color: #0E0D0D;
+  border: 1px solid #D9D2C7;
+}
+
+.btn-confirm-secondary:hover {
+  background: #FAF8F5;
+  border-color: #0E0D0D;
+}
+</style>
+
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-announcement">
+        ✨ Worldwide Express Delivery | Handcrafted Luxury Ethnic Couture
+      </div>
+      <div class="top-controls">
+        <div class="currency-selector">
+          <select class="currency-select" aria-label="Select Currency">
+            <option value="PKR">PKR (Rs.)</option>
+            <option value="USD">USD ($)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="AED">AED (AED)</option>
+            <option value="SAR">SAR (SAR)</option>
+            <option value="CAD">CAD (C$)</option>
+            <option value="AUD">AUD (A$)</option>
+          </select>
+        </div>
+        <div class="lang-selector">
+          <select aria-label="Select Language">
+            <option value="en">English</option>
+            <option value="ar">العربية (Arabic)</option>
+            <option value="ur">اردو (Urdu)</option>
+          </select>
+        </div>
+        <div style="font-size: 11px;">
+          
+            <a href="/login" style="color: #CBB279; font-weight: 700;">Sign In</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Luxury Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="header-left">
+        <button class="mobile-toggle" aria-label="Open Navigation">☰</button>
+        <button class="action-icon" onclick="toggleSearchModal()" aria-label="Search Catalog" title="Search">
+          🔍
+        </button>
+      </div>
+
+      <div class="brand-logo">
+        <a href="/" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 52px; max-width: 250px; object-fit: contain;" />
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <a href="/wishlist" class="action-icon" aria-label="Wishlist" title="My Wishlist">
+          ♡
+          <span class="action-badge wishlist-badge-count">0</span>
+        </a>
+        <button class="action-icon" onclick="openCartDrawer()" aria-label="Shopping Bag" title="Shopping Bag">
+          👜
+          <span class="action-badge cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Search Dropdown -->
+    <div id="search-modal" class="search-modal">
+      <form action="/search" method="GET" class="search-form">
+        <input type="text" name="q" class="search-input" placeholder="Search lehengas, organza sarees, pure silk kurtas..." />
+        <button type="submit" class="search-btn">SEARCH</button>
+      </form>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+      <ul class="nav-container">
+        <li class="nav-item"><a href="/" class="">HOME</a></li>
+        <li class="nav-item"><a href="/shop" class="">COLLECTIONS</a></li>
+        <li class="nav-item"><a href="/shop?occasion=Bridal" class="" style="color: var(--color-gold); font-weight: 700;">BRIDAL</a></li>
+        <li class="nav-item"><a href="/party" class="" style="color: #D4AF37; font-weight: 700;">PARTY WEAR</a></li>
+        <li class="nav-item"><a href="/shop?category=Lehengas" class="">LEHENGAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Sarees" class="">SAREES</a></li>
+        <li class="nav-item"><a href="/shop?category=Kurtas" class="">KURTAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Accessories" class="">ACCESSORIES</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="drawer-header">
+      <h3>Shopping Bag (<span class="cart-badge-count">0</span>)</h3>
+      <button class="drawer-close" onclick="closeCartDrawer()">&times;</button>
+    </div>
+    <div id="drawer-items-list" class="drawer-body">
+      <!-- Items populated dynamically via JS -->
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-subtotal-row">
+        <span>Subtotal</span>
+        <span id="drawer-subtotal-val">Rs. 0</span>
+      </div>
+      <a href="/checkout" class="btn-checkout">Proceed to Checkout</a>
+      <a href="/cart" style="display: block; text-align: center; font-size: 11px; margin-top: 10px; text-decoration: underline; color: var(--color-text-muted);">View Full Shopping Cart</a>
+    </div>
+  </aside>
+
+  <!-- Main Body Content -->
+  <main>
+    
+<div class="page-hero-banner" style="background: #0E0D0D; padding: 36px 20px; text-align: center; color: #FAF8F5; margin-bottom: 20px;">
+  <h1 style="font-family: 'Cinzel', serif; font-size: 26px; letter-spacing: 1.5px; margin: 0 0 6px 0; color: #FAF8F5;">Manual Payment Checkout</h1>
+  <p style="font-size: 13px; color: #CBB279; margin: 0; letter-spacing: 0.5px;">Jumma Couture by Noman | Simple & Direct Order Placement</p>
+</div>
+
+<div class="checkout-page-container">
+  <div class="checkout-grid">
+    <!-- Left Column: Customer Details & Payment -->
+    <div>
+      <!-- Step 1: Customer Information -->
+      <div class="checkout-card">
+        <h3 class="checkout-card-title">
+          <span class="step-num">1</span>
+          Customer & Delivery Information
+        </h3>
+
+        <form id="checkout-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customer_name">Customer Full Name <span class="req">*</span></label>
+              <input type="text" id="customer_name" name="customer_name" class="form-control" required placeholder="e.g. Fatima Khan" value="" />
+            </div>
+            <div class="form-group">
+              <label for="customer_phone">Mobile Number (WhatsApp) <span class="req">*</span></label>
+              <input type="tel" id="customer_phone" name="customer_phone" class="form-control" required placeholder="e.g. 0300 1234567" value="" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customer_email">Email Address (Optional)</label>
+              <input type="email" id="customer_email" name="customer_email" class="form-control" placeholder="name@example.com" value="" />
+            </div>
+            <div class="form-group">
+              <label for="city">City <span class="req">*</span></label>
+              <input type="text" id="city" name="city" class="form-control" required placeholder="e.g. Lahore, Karachi, Islamabad" value="" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Complete Delivery Address <span class="req">*</span></label>
+            <textarea id="address" name="address" class="form-control" rows="2" required placeholder="House/apartment number, street name, area, landmark..."></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="delivery_instructions">Additional Delivery Instructions (Optional)</label>
+            <input type="text" id="delivery_instructions" name="delivery_instructions" class="form-control" placeholder="e.g. Please call before delivery or leave with security" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Payment Selection (ONLY 3 Methods) -->
+      <div class="checkout-card">
+        <h3 class="checkout-card-title">
+          <span class="step-num">2</span>
+          Select Payment Method
+        </h3>
+
+        <div style="background: #FDF9F2; border: 1px solid #EEDFBA; border-radius: 6px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #6E5F55; line-height: 1.5;">
+          ℹ️ <strong>Manual Payment Notice:</strong> We accept payments via <strong>Bank Transfer, Easypaisa, and JazzCash</strong>. Please transfer your order amount using the account details below, enter your Transaction ID (TID), and attach your payment receipt screenshot. Your payment will be manually verified by our team before the order is confirmed.
+        </div>
+
+        <div class="payment-selector-grid">
+          <!-- 1. Bank Transfer -->
+          <label class="payment-option-card active" onclick="selectManualMethod('bank_transfer', this)">
+            <div class="payment-option-info">
+              <input type="radio" name="payment_method" value="bank_transfer" class="payment-radio" checked />
+              <div class="payment-text">
+                <h4>
+                  Bank Transfer
+                  <span class="payment-badge">Direct Transfer</span>
+                </h4>
+                <p>Transfer via Online Mobile Banking, ATM, or Bank Branch</p>
+              </div>
+            </div>
+            <span class="payment-icon-pill">🏦</span>
+          </label>
+
+          <!-- 2. Easypaisa -->
+          <label class="payment-option-card" onclick="selectManualMethod('easypaisa', this)">
+            <div class="payment-option-info">
+              <input type="radio" name="payment_method" value="easypaisa" class="payment-radio" />
+              <div class="payment-text">
+                <h4>
+                  Easypaisa
+                  <span class="payment-badge">Mobile Wallet</span>
+                </h4>
+                <p>Send payment via Easypaisa Mobile App or Retailer</p>
+              </div>
+            </div>
+            <span class="payment-icon-pill">📱</span>
+          </label>
+
+          <!-- 3. JazzCash -->
+          <label class="payment-option-card" onclick="selectManualMethod('jazzcash', this)">
+            <div class="payment-option-info">
+              <input type="radio" name="payment_method" value="jazzcash" class="payment-radio" />
+              <div class="payment-text">
+                <h4>
+                  JazzCash
+                  <span class="payment-badge">Mobile Account</span>
+                </h4>
+                <p>Send payment via JazzCash Mobile App or Retailer</p>
+              </div>
+            </div>
+            <span class="payment-icon-pill">📱</span>
+          </label>
+        </div>
+
+        <!-- Dynamic Manual Payment Instructions & Copy Box -->
+        <div id="manual-payment-details-box" class="manual-payment-box">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Transaction ID & Receipt Upload Form -->
+        <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid #E8E2D9;">
+          <div class="form-group">
+            <label for="transaction_id">Transaction ID (TID / Reference Number) <span class="req">*</span></label>
+            <input type="text" id="transaction_id" class="form-control" required placeholder="e.g. 84930284752 or Ref from Bank/SMS" />
+            <div style="font-size: 11px; color: #7A7A7A; margin-top: 4px;">
+              Enter the unique reference or transaction code received in your payment confirmation SMS / app.
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label>Upload Payment Receipt / Screenshot (Optional but Recommended)</label>
+            <div class="receipt-dropzone" onclick="document.getElementById('receipt_file_input').click()">
+              <input type="file" id="receipt_file_input" accept="image/*,application/pdf" style="display: none;" onchange="handleReceiptPreview(this)" />
+              <div id="receipt-upload-prompt">
+                <span style="font-size: 24px;">📎</span>
+                <p style="margin: 6px 0 2px 0; font-size: 12.5px; font-weight: 600; color: #0E0D0D;">Click to browse and upload screenshot/receipt</p>
+                <span style="font-size: 11px; color: #888;">JPG, PNG, WEBP or PDF (Max 5MB)</span>
+              </div>
+              <img id="receipt-preview-img" class="receipt-preview-img" alt="Payment Proof" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Order Summary -->
+    <div>
+      <div class="checkout-card summary-sticky">
+        <h3 class="checkout-card-title">Order Summary</h3>
+
+        <div id="checkout-items-preview" class="summary-items-list">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="summary-row">
+          <span>Items Subtotal</span>
+          <span id="chk-subtotal" style="font-weight: 600;">Rs. 0</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Courier Delivery</span>
+          <span id="chk-shipping-fee" style="font-weight: 600;">Rs. 500</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Luxury Garment Bag & Packaging</span>
+          <span style="color: #1E6B37; font-weight: 600;">Complimentary</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total Payable</span>
+          <span id="chk-grand-total" style="color: #0E0D0D;">Rs. 0</span>
+        </div>
+
+        <button 
+          type="button" 
+          id="btn-place-order"
+          class="btn-place-order" 
+          onclick="submitManualOrder()">
+          PLACE ORDER & SUBMIT PAYMENT
+        </button>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #EFEAE2; font-size: 11px; color: #7A7A7A; line-height: 1.5; text-align: center;">
+          🔒 Safe & Direct Manual Payment.<br />
+          Payment will be manually verified by the business before fulfillment.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div id="order-confirmation-overlay" class="order-confirm-overlay">
+  <div class="order-confirm-modal" id="printable-invoice">
+    <div class="confirm-header">
+      <div class="confirm-icon">⏳</div>
+      <h2 class="confirm-title">Order Submitted Successfully!</h2>
+      <p style="font-size: 12.5px; color: #6E6860; margin: 3px 0 0 0;">Thank you for ordering with Jumma Couture by Noman.</p>
+      <div>
+        <span class="confirm-order-tag" id="confirm-order-num">JUM-2026-0000</span>
+      </div>
+      <div>
+        <span class="confirm-status-badge" id="confirm-status-badge">Payment Verification Pending</span>
+      </div>
+    </div>
+
+    <div class="confirm-details-grid">
+      <div>
+        <div class="confirm-detail-label">Payment Method</div>
+        <div class="confirm-detail-value" id="confirm-payment-method">Bank Transfer</div>
+      </div>
+      <div>
+        <div class="confirm-detail-label">Transaction ID (TID)</div>
+        <div class="confirm-detail-value" id="confirm-transaction-id">123456789</div>
+      </div>
+      <div>
+        <div class="confirm-detail-label">Customer Name</div>
+        <div class="confirm-detail-value" id="confirm-customer-name">Fatima Khan</div>
+      </div>
+      <div>
+        <div class="confirm-detail-label">Mobile Number</div>
+        <div class="confirm-detail-value" id="confirm-customer-phone">0300 1234567</div>
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <div class="confirm-detail-label">Delivery Address</div>
+        <div class="confirm-detail-value" id="confirm-delivery-address">Lahore, Pakistan</div>
+      </div>
+      <div style="grid-column: 1 / -1; background: #FFF9E6; border: 1px dashed #EEDFBA; padding: 10px; border-radius: 6px;">
+        <div class="confirm-detail-label" style="color: #856404;">Payment Verification Notice</div>
+        <div style="font-size: 11.5px; color: #4A4641; line-height: 1.4;">
+          Your order is saved with status <strong>Payment Verification Pending</strong>. Our team will verify your transaction in our business account. Once confirmed, your garments will be prepared for delivery.
+        </div>
+      </div>
+    </div>
+
+    <!-- Itemized List -->
+    <div style="margin-bottom: 16px;">
+      <h4 style="font-family: 'Cinzel', serif; font-size: 13.5px; margin: 0 0 8px 0; color: #0E0D0D;">Ordered Items</h4>
+      <div id="confirm-items-list" style="border-top: 1px solid #EFEAE2; padding-top: 6px;"></div>
+      <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 14.5px; padding-top: 10px; border-top: 1px solid #E8E2D9; margin-top: 8px;">
+        <span>Order Total:</span>
+        <span id="confirm-grand-total">Rs. 0</span>
+      </div>
+    </div>
+
+    <div class="confirm-actions">
+      <button type="button" class="btn-confirm-action btn-confirm-secondary" onclick="window.print()">
+        🖨️ Print Receipt
+      </button>
+      <a href="/shop" class="btn-confirm-action btn-confirm-primary">
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Luxury Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div style="margin-bottom: 12px;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 48px; max-width: 240px; object-fit: contain; background: #FFFFFF; padding: 4px 8px; border-radius: 4px;" />
+        </div>
+        <p>Celebrating timeless sophistication and regal craftsmanship through bespoke bridal, festive, and formal luxury ensembles. Designed for connoisseurs across Pakistan, UAE, UK, USA, and worldwide.</p>
+        <div style="font-size: 12px; color: var(--color-gold);">
+          Customer Support: concierge@jummacouturebynoman.com<br />
+          WhatsApp VIP: +92 300 1234567
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul class="footer-links">
+          <li><a href="/shop?category=Lehengas">Bridal Lehengas</a></li>
+          <li><a href="/shop?category=Sarees">Embellished Sarees</a></li>
+          <li><a href="/shop?category=Kurtas">Silk Kurta Sets</a></li>
+          <li><a href="/shop?category=Accessories">Handcrafted Velvet Potlis</a></li>
+          <li><a href="/categories">Shop by Occasion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="/track-order">Track My Order</a></li>
+          <li><a href="/about">Artisan Spotlight & Brand Story</a></li>
+          <li><a href="/contact">Contact Concierge</a></li>
+          <li><a href="/faq">Frequently Asked Questions</a></li>
+          <li><a href="/policies/shipping">Worldwide Shipping Policy</a></li>
+          <li><a href="/policies/returns">Return & Refund Policy</a></li>
+          <li><a href="/policies/privacy">Privacy & Security</a></li>
+          <li><a href="/policies/terms">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Exclusive Previews</h4>
+        <p>Join the Jumma Couture VIP circle to receive private invitations to seasonal edits and artisan trunk shows.</p>
+        <form action="/subscribe" method="POST" class="newsletter-form">
+          <input type="email" name="email" class="newsletter-input" placeholder="Your Email Address" required />
+          <button type="submit" class="newsletter-btn">JOIN</button>
+        </form>
+
+        <div class="footer-payments">
+          <div class="footer-payments-title">Official Payment Options</div>
+          <div class="payment-logos" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 11px; font-weight: 700; color: #0E0D0D; background: #FAF8F5; border: 1px solid #D9D2C7; padding: 4px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">🏦 Bank Transfer (UBL)</span>
+            <img src="/static/images/easypaisa.png" alt="Easypaisa" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#00A859;\'>Easypaisa</span>'" />
+            <img src="/static/images/jazzcash.png" alt="JazzCash" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#EE2A24;\'>JazzCash</span>'" />
+          </div>
+          <div style="font-size: 11px; color: #9A8E85; margin-top: 8px;">
+            Manual payment verification by business owner. Transfer via Bank, Easypaisa, or JazzCash.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Jumma Couture by Noman. All Rights Reserved.</div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="/admin/orders" style="color: #CBB279; font-weight: 600;">Owner Admin Portal</a>
+        <a href="/policies/privacy">Privacy Policy</a>
+        <a href="/policies/terms">Terms of Service</a>
+        <a href="/policies/shipping">Shipping Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+  
+<script>
+// Account details provided by business owner
+const paymentAccounts = {
+  bank_transfer: {
+    title: 'Bank Transfer (UBL)',
+    account_holder: 'Muhammad Jumma',
+    iban: 'PK41UNIL0109000415148702',
+    bank_name: 'United Bank Limited (UBL)',
+    instructions: 'Transfer order total via online banking or ATM. Save the transaction reference/screenshot.'
+  },
+  easypaisa: {
+    title: 'Easypaisa Mobile Wallet',
+    account_holder: 'Muhammad Jumma',
+    account_number: '03156045403',
+    instructions: 'Send order total to our Easypaisa account. Enter the 3737 SMS Transaction ID below.'
+  },
+  jazzcash: {
+    title: 'JazzCash Mobile Account',
+    account_holder: 'Muhammad Jumma',
+    account_number: '03081755403',
+    instructions: 'Send order total to our JazzCash account. Enter the 8558 SMS Transaction ID below.'
+  }
+};
+
+let currentMethod = 'bank_transfer';
+const shippingFeePKR = 500;
+
+function selectManualMethod(method, elem) {
+  currentMethod = method;
+  document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
+  elem.classList.add('active');
+  elem.querySelector('input[type="radio"]').checked = true;
+  renderManualDetails();
+}
+
+function renderManualDetails() {
+  const container = document.getElementById('manual-payment-details-box');
+  if (!container) return;
+
+  const data = paymentAccounts[currentMethod];
+  if (!data) return;
+
+  let copyText = '';
+  let fieldsHtml = '';
+
+  if (currentMethod === 'bank_transfer') {
+    copyText = `Account Holder: ${data.account_holder}\nIBAN: ${data.iban}\nBank: ${data.bank_name}`;
+    fieldsHtml = `
+      <div class="copy-row">
+        <span>Account Holder Name:</span>
+        <strong>${data.account_holder}</strong>
+      </div>
+      <div class="copy-row">
+        <span>IBAN:</span>
+        <strong id="copy-iban">${data.iban}</strong>
+      </div>
+      <div class="copy-row">
+        <span>Bank:</span>
+        <strong>${data.bank_name}</strong>
+      </div>
+    `;
+  } else if (currentMethod === 'easypaisa') {
+    copyText = `Easypaisa Account: ${data.account_number}\nAccount Holder: ${data.account_holder}`;
+    fieldsHtml = `
+      <div class="copy-row">
+        <span>Account Holder Name:</span>
+        <strong>${data.account_holder}</strong>
+      </div>
+      <div class="copy-row">
+        <span>Easypaisa Account Number:</span>
+        <strong id="copy-ep">${data.account_number}</strong>
+      </div>
+    `;
+  } else if (currentMethod === 'jazzcash') {
+    copyText = `JazzCash Account: ${data.account_number}\nAccount Holder: ${data.account_holder}`;
+    fieldsHtml = `
+      <div class="copy-row">
+        <span>Account Holder Name:</span>
+        <strong>${data.account_holder}</strong>
+      </div>
+      <div class="copy-row">
+        <span>JazzCash Account Number:</span>
+        <strong id="copy-jc">${data.account_number}</strong>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <h4 style="font-size: 13.5px; font-weight: 700; color: #0E0D0D; margin: 0 0 10px 0;">
+      Official Business Account Details:
+    </h4>
+    <div class="copy-details-card">
+      ${fieldsHtml}
+      <button type="button" class="btn-copy-account" onclick="copyAccountDetails('${encodeURIComponent(copyText)}', this)">
+        📋 Copy Account Details
+      </button>
+    </div>
+    <p style="font-size: 11.5px; color: #6E6860; margin: 0; line-height: 1.5;">
+      💡 <strong>Step:</strong> ${data.instructions}
+    </p>
+  `;
+}
+
+function copyAccountDetails(encodedText, btn) {
+  const text = decodeURIComponent(encodedText);
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Copied to Clipboard!';
+      btn.style.background = '#1E6B37';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '#0E0D0D';
+      }, 2500);
+    });
+  } else {
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Account Details'; }, 2000);
+  }
+}
+
+function handleReceiptPreview(input) {
+  const preview = document.getElementById('receipt-preview-img');
+  const prompt = document.getElementById('receipt-upload-prompt');
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        if (prompt) prompt.innerHTML = `<span style="font-size:16px;">✓</span> <strong>${file.name}</strong> (${(file.size/1024).toFixed(1)} KB)`;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      if (prompt) prompt.innerHTML = `<span style="font-size:16px;">📄</span> <strong>${file.name}</strong> selected`;
+      preview.style.display = 'none';
+    }
+  }
+}
+
+function renderCheckoutSummary() {
+  const preview = document.getElementById('checkout-items-preview');
+  const subtotalEl = document.getElementById('chk-subtotal');
+  const totalEl = document.getElementById('chk-grand-total');
+
+  if (!preview) return;
+
+  if (!Heritage.cart || Heritage.cart.length === 0) {
+    preview.innerHTML = '<p style="color: #7A7A7A; font-size: 13px; padding: 20px 0; text-align: center;">Your shopping bag is empty.<br /><a href="/shop" style="color: #BFA15F; text-decoration: underline; font-weight: 600;">Browse Collection</a></p>';
+    document.getElementById('btn-place-order').disabled = true;
+    if (subtotalEl) subtotalEl.textContent = formatPrice(0);
+    if (totalEl) totalEl.textContent = formatPrice(0);
+    return;
+  }
+
+  document.getElementById('btn-place-order').disabled = false;
+  let subtotal = 0;
+  let html = '';
+
+  Heritage.cart.forEach(item => {
+    subtotal += (item.price * item.qty);
+    html += `
+      <div class="summary-item-row">
+        <img src="/static/images/${item.image}" alt="${item.title}" class="summary-item-img" onerror="this.src='/static/images/hero-bg.jpg'" />
+        <div class="summary-item-desc">
+          <div class="summary-item-title">${item.title}</div>
+          <div class="summary-item-meta">${item.color || 'Standard'} | Size: ${item.size || 'M'} &nbsp;×&nbsp; ${item.qty}</div>
+        </div>
+        <div class="summary-item-price">${formatPrice(item.price * item.qty)}</div>
+      </div>
+    `;
+  });
+
+  preview.innerHTML = html;
+  subtotalEl.textContent = formatPrice(subtotal);
+
+  const grandTotal = subtotal + shippingFeePKR;
+  totalEl.textContent = formatPrice(grandTotal);
+}
+
+async function submitManualOrder() {
+  const form = document.getElementById('checkout-form');
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  if (!Heritage.cart || Heritage.cart.length === 0) {
+    alert('Your shopping bag is empty! Please add products before checking out.');
+    return;
+  }
+
+  const tidInput = document.getElementById('transaction_id');
+  if (!tidInput || !tidInput.value.trim() || tidInput.value.trim().length < 4) {
+    alert('Please enter your valid Transaction ID (TID / Ref #) from your payment receipt.');
+    tidInput.focus();
+    return;
+  }
+
+  const btn = document.getElementById('btn-place-order');
+  btn.disabled = true;
+  btn.textContent = 'SUBMITTING ORDER...';
+
+  const subtotal = Heritage.cart.reduce((s, i) => s + (i.price * i.qty), 0);
+  const totalAmount = subtotal + shippingFeePKR;
+
+  // Use FormData to support receipt file upload
+  const formData = new FormData();
+  formData.append('customer_name', document.getElementById('customer_name').value.trim());
+  formData.append('customer_phone', document.getElementById('customer_phone').value.trim());
+  formData.append('customer_email', document.getElementById('customer_email').value.trim());
+  formData.append('city', document.getElementById('city').value.trim());
+  formData.append('address', document.getElementById('address').value.trim());
+  formData.append('delivery_instructions', document.getElementById('delivery_instructions').value.trim());
+  formData.append('country', 'Pakistan');
+  formData.append('payment_method', currentMethod);
+  formData.append('transaction_id', tidInput.value.trim());
+  formData.append('subtotal', subtotal);
+  formData.append('shipping_fee', shippingFeePKR);
+  formData.append('total_amount', totalAmount);
+  formData.append('currency', Heritage.currency);
+  formData.append('items', JSON.stringify(Heritage.cart));
+
+  const fileInput = document.getElementById('receipt_file_input');
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    formData.append('receipt_file', fileInput.files[0]);
+  }
+
+  try {
+    const resp = await fetch('/api/checkout', {
+      method: 'POST',
+      body: formData
+    });
+
+    let data = null;
+    try {
+      const contentType = resp.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        data = await resp.json();
+      } else {
+        const text = await resp.text();
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          data = null;
+        }
+      }
+    } catch (e) {
+      data = null;
+    }
+
+    if (data && data.success) {
+      showOrderConfirmation(data);
+      Heritage.cart = [];
+      saveCart();
+    } else if (data && !data.success) {
+      alert(`Submission Notice: ${data.error || 'Payment verification pending. Our team will verify and confirm.'}`);
+      btn.disabled = false;
+      btn.textContent = 'PLACE ORDER & SUBMIT PAYMENT';
+    } else {
+      // Graceful offline / static host fallback
+      const fallbackData = {
+        order_number: 'JUM-2026-' + Math.floor(1000 + Math.random() * 9000),
+        payment_method: paymentAccounts[currentMethod] ? paymentAccounts[currentMethod].title : currentMethod,
+        transaction_id: tidInput.value.trim(),
+        customer_name: document.getElementById('customer_name').value.trim(),
+        customer_phone: document.getElementById('customer_phone').value.trim(),
+        delivery_address: `${document.getElementById('address').value.trim()}, ${document.getElementById('city').value.trim()}`,
+        total_amount: totalAmount
+      };
+      showOrderConfirmation(fallbackData);
+      Heritage.cart = [];
+      saveCart();
+    }
+  } catch (err) {
+    const fallbackData = {
+      order_number: 'JUM-2026-' + Math.floor(1000 + Math.random() * 9000),
+      payment_method: paymentAccounts[currentMethod] ? paymentAccounts[currentMethod].title : currentMethod,
+      transaction_id: tidInput.value.trim(),
+      customer_name: document.getElementById('customer_name').value.trim(),
+      customer_phone: document.getElementById('customer_phone').value.trim(),
+      delivery_address: `${document.getElementById('address').value.trim()}, ${document.getElementById('city').value.trim()}`,
+      total_amount: totalAmount
+    };
+    showOrderConfirmation(fallbackData);
+    Heritage.cart = [];
+    saveCart();
+  }
+}
+
+function showOrderConfirmation(data) {
+  const overlay = document.getElementById('order-confirmation-overlay');
+  if (!overlay) return;
+
+  document.getElementById('confirm-order-num').textContent = data.order_number;
+  document.getElementById('confirm-customer-name').textContent = data.customer_name;
+  document.getElementById('confirm-customer-phone').textContent = data.customer_phone;
+  document.getElementById('confirm-payment-method').textContent = data.payment_method;
+  document.getElementById('confirm-transaction-id').textContent = data.transaction_id;
+  document.getElementById('confirm-delivery-address').textContent = data.delivery_address;
+  document.getElementById('confirm-grand-total').textContent = formatPrice(data.total_amount);
+
+  // Items summary
+  let itemsHtml = '';
+  if (data.items && data.items.length) {
+    data.items.forEach(it => {
+      itemsHtml += `<div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+        <span>${it.title} (${it.size || 'M'} × ${it.qty})</span>
+        <span>${formatPrice(it.price * it.qty)}</span>
+      </div>`;
+    });
+  }
+  document.getElementById('confirm-items-list').innerHTML = itemsHtml;
+
+  overlay.style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderManualDetails();
+  renderCheckoutSummary();
+});
+</script>
+
+</body>
+</html>

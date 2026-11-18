@@ -1,0 +1,547 @@
+{% extends "base.html" %}
+
+{% block title %}Order Management & Verification | Jumma Couture by Noman{% endblock %}
+
+{% block extra_head %}
+<style>
+.admin-container {
+  max-width: 1380px;
+  margin: 30px auto 80px;
+  padding: 0 20px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-title {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  color: var(--color-burgundy);
+  margin: 0;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #E8E2D9;
+}
+
+.admin-tab-btn {
+  padding: 12px 22px;
+  background: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6E6860;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.25s ease;
+}
+
+.admin-tab-btn.active {
+  color: #0E0D0D;
+  border-bottom-color: #BFA15F;
+}
+
+.admin-card {
+  background: #FFFFFF;
+  border: 1px solid #E8E2D9;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* Orders Table */
+.orders-table-wrapper {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.orders-table th {
+  background: #FAF8F5;
+  padding: 12px 14px;
+  font-weight: 700;
+  color: #4A4641;
+  border-bottom: 1px solid #E8E2D9;
+  white-space: nowrap;
+}
+
+.orders-table td {
+  padding: 14px;
+  border-bottom: 1px solid #F0ECE4;
+  vertical-align: middle;
+}
+
+.orders-table tr:hover {
+  background: #FCFBF9;
+}
+
+/* Badges */
+.badge-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.badge-status.verification-pending {
+  background: #FFF3CD;
+  color: #856404;
+  border: 1px solid #FFEEBA;
+}
+
+.badge-status.paid {
+  background: #D4EDDA;
+  color: #155724;
+  border: 1px solid #C3E6CB;
+}
+
+.badge-status.pending {
+  background: #E2E3E5;
+  color: #383D41;
+  border: 1px solid #D6D8DB;
+}
+
+.badge-status.failed {
+  background: #F8D7DA;
+  color: #721C24;
+  border: 1px solid #F5C6CB;
+}
+
+.badge-status.refunded {
+  background: #E8DAEF;
+  color: #6C3483;
+  border: 1px solid #D7BDE2;
+}
+
+.status-select {
+  padding: 6px 10px;
+  font-size: 12px;
+  border: 1px solid #D9D2C7;
+  border-radius: 4px;
+  background: #FAF8F5;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-select:focus {
+  border-color: #BFA15F;
+}
+
+.receipt-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #D9D2C7;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.receipt-thumb:hover {
+  transform: scale(1.08);
+}
+
+/* Modal for Receipt Zoom */
+.receipt-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 100000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.receipt-modal-content {
+  background: #FFF;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.receipt-modal-content img {
+  max-height: 70vh;
+  margin: 0 auto 16px;
+  border-radius: 4px;
+}
+
+/* Config Grid */
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.config-box {
+  background: #FCFBF9;
+  border: 1px solid #E8E2D9;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.config-box h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: #0E0D0D;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner" style="padding: 36px 20px; text-align: center; background: #0E0D0D; color: #FAF8F5; margin-bottom: 20px;">
+  <h2 style="font-family: 'Cinzel', serif; font-size: 26px; letter-spacing: 1.5px; margin: 0 0 6px 0; color: #FAF8F5;">Owner Order Management & Payment Auditing</h2>
+  <p style="font-size: 13px; color: #CBB279; margin: 0;">Jumma Couture by Noman | Manual Payment Verification System</p>
+</div>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <div>
+      <h1 class="admin-title">Orders Dashboard</h1>
+      <p style="font-size: 13px; color: #6E6860; margin: 4px 0 0 0;">
+        Review customer payments, inspect uploaded receipts, and manually verify funds.
+      </p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="/shop" class="btn-primary" style="padding: 9px 16px; font-size: 12px;">View Store</a>
+      <a href="/checkout" class="btn-primary" style="padding: 9px 16px; font-size: 12px; background: #BFA15F; border-color: #BFA15F; color: #0E0D0D;">Test Checkout</a>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab-btn active" onclick="switchAdminTab('tab-orders', this)">Customer Orders ({{ orders|length }})</button>
+    <button class="admin-tab-btn" onclick="switchAdminTab('tab-config', this)">Payment Account Settings</button>
+  </div>
+
+  <!-- TAB 1: ORDERS LIST -->
+  <div id="tab-orders" class="admin-tab-content">
+    <div class="admin-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+        <h3 style="font-family: 'Cinzel', serif; font-size: 18px; margin: 0;">Order Records</h3>
+        <div style="font-size: 12px; color: #6E6860;">
+          Filter:
+          <select id="order-filter" onchange="filterOrders(this.value)" class="status-select">
+            <option value="ALL">All Statuses</option>
+            <option value="Payment Verification Pending">Payment Verification Pending</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Failed">Failed</option>
+            <option value="Refunded">Refunded</option>
+          </select>
+        </div>
+      </div>
+
+      {% if orders|length == 0 %}
+      <div style="text-align: center; padding: 40px; color: #6E6860;">
+        <p style="font-size: 32px; margin-bottom: 10px;">📋</p>
+        <p style="font-weight: 600;">No customer orders placed yet.</p>
+        <p style="font-size: 12px;">Orders submitted through the checkout will appear here for manual verification.</p>
+      </div>
+      {% else %}
+      <div class="orders-table-wrapper">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Date</th>
+              <th>Customer Details</th>
+              <th>Items & Total</th>
+              <th>Payment Method</th>
+              <th>Transaction ID (TID)</th>
+              <th>Receipt Proof</th>
+              <th>Current Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for o in orders %}
+            <tr class="order-row" data-status="{{ o.payment_status }}">
+              <td>
+                <strong style="color: #0E0D0D; font-family: monospace; font-size: 13px;">{{ o.order_number }}</strong>
+              </td>
+              <td style="color: #6E6860; font-size: 11px; white-space: nowrap;">
+                {{ o.created_at }}
+              </td>
+              <td>
+                <div style="font-weight: 600; color: #0E0D0D;">{{ o.customer_name }}</div>
+                <div style="font-size: 11px; color: #6E6860;">📞 {{ o.customer_phone }}</div>
+                {% if o.customer_email %}
+                <div style="font-size: 11px; color: #6E6860;">✉️ {{ o.customer_email }}</div>
+                {% endif %}
+                <div style="font-size: 11px; color: #4A4641; margin-top: 3px;">
+                  📍 {{ o.address }}, {{ o.city }}
+                </div>
+                {% if o.delivery_instructions %}
+                <div style="font-size: 10px; color: #856404; background: #FFF9E6; padding: 2px 6px; border-radius: 3px; margin-top: 3px;">
+                  Note: {{ o.delivery_instructions }}
+                </div>
+                {% endif %}
+              </td>
+              <td>
+                <div style="font-weight: 700; color: #0E0D0D; font-size: 14px;">Rs. {{ "{:,}".format(o.total_amount|int) }}</div>
+                <div style="font-size: 11px; color: #6E6860;">
+                  {% for it in o.order_items %}
+                    <div>• {{ it.title }} ({{ it.size or 'M' }} x {{ it.qty }})</div>
+                  {% endfor %}
+                </div>
+              </td>
+              <td>
+                <span style="font-weight: 600; color: #0E0D0D;">{{ o.payment_method }}</span>
+              </td>
+              <td>
+                <span style="background: #F4EFE6; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; font-weight: 600; color: #0E0D0D;">
+                  {{ o.transaction_id or 'N/A' }}
+                </span>
+              </td>
+              <td>
+                {% if o.receipt_path %}
+                <img src="{{ o.receipt_path }}" alt="Receipt" class="receipt-thumb" onclick="openReceiptModal('{{ o.receipt_path }}', '{{ o.order_number }}')" title="Click to enlarge" />
+                <div style="font-size: 10px; color: #1E6B37; margin-top: 2px;">Receipt Attached</div>
+                {% else %}
+                <span style="color: #999; font-size: 11px;">No file</span>
+                {% endif %}
+              </td>
+              <td>
+                {% set status_cls = 'pending' %}
+                {% if o.payment_status == 'Payment Verification Pending' %}
+                  {% set status_cls = 'verification-pending' %}
+                {% elif o.payment_status == 'Paid' %}
+                  {% set status_cls = 'paid' %}
+                {% elif o.payment_status == 'Failed' %}
+                  {% set status_cls = 'failed' %}
+                {% elif o.payment_status == 'Refunded' %}
+                  {% set status_cls = 'refunded' %}
+                {% endif %}
+                <span class="badge-status {{ status_cls }}" id="badge-{{ o.order_number }}">{{ o.payment_status }}</span>
+              </td>
+              <td>
+                <select class="status-select" onchange="updateOrderStatus('{{ o.order_number }}', this.value)">
+                  {% for s in valid_statuses %}
+                  <option value="{{ s }}" {% if s == o.payment_status %}selected{% endif %}>{{ s }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- TAB 2: PAYMENT CONFIGURATION -->
+  <div id="tab-config" class="admin-tab-content" style="display: none;">
+    <div class="admin-card">
+      <div style="margin-bottom: 20px;">
+        <h3 style="font-family: 'Cinzel', serif; font-size: 18px; margin: 0 0 6px 0;">Editable Payment Account Details</h3>
+        <p style="font-size: 13px; color: #6E6860; margin: 0;">
+          These account details are shown to customers on the checkout page. Update them here at any time.
+        </p>
+      </div>
+
+      <form id="payment-config-form" onsubmit="savePaymentConfig(event)">
+        <div class="config-grid">
+          <!-- Bank Transfer -->
+          <div class="config-box">
+            <h4>🏦 Bank Transfer</h4>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Account Holder Name</label>
+              <input type="text" id="cfg_bank_holder" class="form-control" value="{{ payment_config.bank_transfer.account_holder }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">IBAN</label>
+              <input type="text" id="cfg_bank_iban" class="form-control" value="{{ payment_config.bank_transfer.iban }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Bank Name</label>
+              <input type="text" id="cfg_bank_name" class="form-control" value="{{ payment_config.bank_transfer.bank_name }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Customer Instructions</label>
+              <textarea id="cfg_bank_instructions" class="form-control" rows="3">{{ payment_config.bank_transfer.instructions }}</textarea>
+            </div>
+          </div>
+
+          <!-- Easypaisa -->
+          <div class="config-box">
+            <h4>📱 Easypaisa</h4>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Account Holder Name</label>
+              <input type="text" id="cfg_ep_holder" class="form-control" value="{{ payment_config.easypaisa.account_holder }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Easypaisa Mobile Number</label>
+              <input type="text" id="cfg_ep_number" class="form-control" value="{{ payment_config.easypaisa.account_number }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Customer Instructions</label>
+              <textarea id="cfg_ep_instructions" class="form-control" rows="4">{{ payment_config.easypaisa.instructions }}</textarea>
+            </div>
+          </div>
+
+          <!-- JazzCash -->
+          <div class="config-box">
+            <h4>📱 JazzCash</h4>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Account Holder Name</label>
+              <input type="text" id="cfg_jc_holder" class="form-control" value="{{ payment_config.jazzcash.account_holder }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">JazzCash Mobile Number</label>
+              <input type="text" id="cfg_jc_number" class="form-control" value="{{ payment_config.jazzcash.account_number }}" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 11px; font-weight: 600; color: #4A4641; display: block; margin-bottom: 4px;">Customer Instructions</label>
+              <textarea id="cfg_jc_instructions" class="form-control" rows="4">{{ payment_config.jazzcash.instructions }}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; text-align: right;">
+          <button type="submit" class="btn-primary" style="padding: 12px 28px; font-size: 13px;">Save Payment Account Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Receipt Lightbox Modal -->
+<div id="receipt-modal" class="receipt-modal-overlay" onclick="closeReceiptModal()">
+  <div class="receipt-modal-content" onclick="event.stopPropagation()">
+    <h3 id="receipt-modal-title" style="font-family: 'Cinzel', serif; font-size: 16px; margin: 0 0 14px 0;">Payment Receipt Proof</h3>
+    <img id="receipt-modal-img" src="" alt="Customer Receipt" />
+    <div>
+      <a id="receipt-modal-link" href="" target="_blank" class="btn-primary" style="padding: 8px 16px; font-size: 12px; display: inline-block;">Open Full Size</a>
+      <button type="button" onclick="closeReceiptModal()" class="btn-primary" style="padding: 8px 16px; font-size: 12px; background: #6E6860; border-color: #6E6860; margin-left: 8px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchAdminTab(tabId, btn) {
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.style.display = 'none');
+  document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).style.display = 'block';
+  btn.classList.add('active');
+}
+
+function filterOrders(status) {
+  document.querySelectorAll('.order-row').forEach(row => {
+    if (status === 'ALL' || row.getAttribute('data-status') === status) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+
+async function updateOrderStatus(orderNum, newStatus) {
+  try {
+    const res = await fetch(`/api/admin/orders/${orderNum}/status`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const badge = document.getElementById(`badge-${orderNum}`);
+      if (badge) {
+        badge.textContent = newStatus;
+        badge.className = 'badge-status';
+        if (newStatus === 'Payment Verification Pending') badge.classList.add('verification-pending');
+        else if (newStatus === 'Paid') badge.classList.add('paid');
+        else if (newStatus === 'Failed') badge.classList.add('failed');
+        else if (newStatus === 'Refunded') badge.classList.add('refunded');
+        else badge.classList.add('pending');
+      }
+      showToast(`Order ${orderNum} status updated to ${newStatus}`);
+    } else {
+      alert(`Error updating status: ${data.error}`);
+    }
+  } catch (err) {
+    alert(`Server error: ${err.message}`);
+  }
+}
+
+async function savePaymentConfig(e) {
+  e.preventDefault();
+  const payload = {
+    bank_transfer: {
+      account_holder: document.getElementById('cfg_bank_holder').value.trim(),
+      iban: document.getElementById('cfg_bank_iban').value.trim(),
+      bank_name: document.getElementById('cfg_bank_name').value.trim(),
+      instructions: document.getElementById('cfg_bank_instructions').value.trim()
+    },
+    easypaisa: {
+      account_holder: document.getElementById('cfg_ep_holder').value.trim(),
+      account_number: document.getElementById('cfg_ep_number').value.trim(),
+      instructions: document.getElementById('cfg_ep_instructions').value.trim()
+    },
+    jazzcash: {
+      account_holder: document.getElementById('cfg_jc_holder').value.trim(),
+      account_number: document.getElementById('cfg_jc_number').value.trim(),
+      instructions: document.getElementById('cfg_jc_instructions').value.trim()
+    }
+  };
+
+  try {
+    const res = await fetch('/api/admin/payment-config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('Payment account details updated successfully!');
+    } else {
+      alert(`Error: ${data.error}`);
+    }
+  } catch (err) {
+    alert(`Server error: ${err.message}`);
+  }
+}
+
+function openReceiptModal(src, orderNum) {
+  document.getElementById('receipt-modal-img').src = src;
+  document.getElementById('receipt-modal-link').href = src;
+  document.getElementById('receipt-modal-title').textContent = `Receipt Proof - Order ${orderNum}`;
+  document.getElementById('receipt-modal').style.display = 'flex';
+}
+
+function closeReceiptModal() {
+  document.getElementById('receipt-modal').style.display = 'none';
+}
+</script>
+{% endblock %}

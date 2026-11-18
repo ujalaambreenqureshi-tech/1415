@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Emerald Green – Moos Embellished Silk Ensemble | Jumma Couture by Noman</title>
+  <meta name="description" content="Exquisite Emerald Green 3-Piece Ensemble with Delicate All-Over Moos Work - Discover effortless elegance with this exquisite emerald green three-piece ensemble, thoughtfully designed to combine contemporary sophistication with..." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-announcement">
+        ✨ Worldwide Express Delivery | Handcrafted Luxury Ethnic Couture
+      </div>
+      <div class="top-controls">
+        <div class="currency-selector">
+          <select class="currency-select" aria-label="Select Currency">
+            <option value="PKR">PKR (Rs.)</option>
+            <option value="USD">USD ($)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="AED">AED (AED)</option>
+            <option value="SAR">SAR (SAR)</option>
+            <option value="CAD">CAD (C$)</option>
+            <option value="AUD">AUD (A$)</option>
+          </select>
+        </div>
+        <div class="lang-selector">
+          <select aria-label="Select Language">
+            <option value="en">English</option>
+            <option value="ar">العربية (Arabic)</option>
+            <option value="ur">اردو (Urdu)</option>
+          </select>
+        </div>
+        <div style="font-size: 11px;">
+          
+            <a href="/login" style="color: #CBB279; font-weight: 700;">Sign In</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Luxury Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="header-left">
+        <button class="mobile-toggle" aria-label="Open Navigation">☰</button>
+        <button class="action-icon" onclick="toggleSearchModal()" aria-label="Search Catalog" title="Search">
+          🔍
+        </button>
+      </div>
+
+      <div class="brand-logo">
+        <a href="/" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 52px; max-width: 250px; object-fit: contain;" />
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <a href="/wishlist" class="action-icon" aria-label="Wishlist" title="My Wishlist">
+          ♡
+          <span class="action-badge wishlist-badge-count">0</span>
+        </a>
+        <button class="action-icon" onclick="openCartDrawer()" aria-label="Shopping Bag" title="Shopping Bag">
+          👜
+          <span class="action-badge cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Search Dropdown -->
+    <div id="search-modal" class="search-modal">
+      <form action="/search" method="GET" class="search-form">
+        <input type="text" name="q" class="search-input" placeholder="Search lehengas, organza sarees, pure silk kurtas..." />
+        <button type="submit" class="search-btn">SEARCH</button>
+      </form>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+      <ul class="nav-container">
+        <li class="nav-item"><a href="/" class="">HOME</a></li>
+        <li class="nav-item"><a href="/shop" class="">COLLECTIONS</a></li>
+        <li class="nav-item"><a href="/shop?occasion=Bridal" class="" style="color: var(--color-gold); font-weight: 700;">BRIDAL</a></li>
+        <li class="nav-item"><a href="/party" class="active" style="color: #D4AF37; font-weight: 700;">PARTY WEAR</a></li>
+        <li class="nav-item"><a href="/shop?category=Lehengas" class="">LEHENGAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Sarees" class="">SAREES</a></li>
+        <li class="nav-item"><a href="/shop?category=Kurtas" class="">KURTAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Accessories" class="">ACCESSORIES</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="drawer-header">
+      <h3>Shopping Bag (<span class="cart-badge-count">0</span>)</h3>
+      <button class="drawer-close" onclick="closeCartDrawer()">&times;</button>
+    </div>
+    <div id="drawer-items-list" class="drawer-body">
+      <!-- Items populated dynamically via JS -->
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-subtotal-row">
+        <span>Subtotal</span>
+        <span id="drawer-subtotal-val">Rs. 0</span>
+      </div>
+      <a href="/checkout" class="btn-checkout">Proceed to Checkout</a>
+      <a href="/cart" style="display: block; text-align: center; font-size: 11px; margin-top: 10px; text-decoration: underline; color: var(--color-text-muted);">View Full Shopping Cart</a>
+    </div>
+  </aside>
+
+  <!-- Main Body Content -->
+  <main>
+    
+<div class="pdp-container">
+  <!-- Left: Multi-Image Gallery -->
+  <div class="pdp-gallery">
+    <div class="pdp-main-img-box">
+      <img id="pdp-main-image" src="/static/images/emerald-silk-front.jpg" alt="Luxury Emerald Green – Moos Embellished Silk Ensemble" />
+    </div>
+
+    <!-- Product Angle & Detail Gallery Thumbnails -->
+    
+    <div class="pdp-gallery-strip" style="margin-top: 6px;">
+      <div style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #CBB279; font-weight: 700; margin-bottom: 8px;">
+        ✦ Click Angles to Inspect Handcrafted Details ✦
+      </div>
+      <div class="pdp-thumbnails pdp-gallery-thumbnails">
+        
+        <div 
+          class="pdp-thumb active"
+          onclick="selectGalleryImage('emerald-silk-front.jpg', this)"
+          title="Shirt Front — Front view with delicate all-over Moos embellishment &amp; embellished neckline">
+          <img src="/static/images/emerald-silk-front.jpg" alt="Shirt Front" />
+          <span class="pdp-thumb-title">Shirt Front</span>
+        </div>
+        
+        <div 
+          class="pdp-thumb "
+          onclick="selectGalleryImage('emerald-silk-back.jpg', this)"
+          title="Shirt Back — Graceful back with evenly distributed Moos handwork">
+          <img src="/static/images/emerald-silk-back.jpg" alt="Shirt Back" />
+          <span class="pdp-thumb-title">Shirt Back</span>
+        </div>
+        
+        <div 
+          class="pdp-thumb "
+          onclick="selectGalleryImage('emerald-silk-dupatta.jpg', this)"
+          title="Dupatta — Elegant Medium Silk dupatta with subtle shimmer accents">
+          <img src="/static/images/emerald-silk-dupatta.jpg" alt="Dupatta" />
+          <span class="pdp-thumb-title">Dupatta</span>
+        </div>
+        
+        <div 
+          class="pdp-thumb "
+          onclick="selectGalleryImage('emerald-silk-trouser.jpg', this)"
+          title="Trouser — Premium Sheesha Silk tailored trouser">
+          <img src="/static/images/emerald-silk-trouser.jpg" alt="Trouser" />
+          <span class="pdp-thumb-title">Trouser</span>
+        </div>
+        
+        <div 
+          class="pdp-thumb "
+          onclick="selectGalleryImage('emerald-silk-model.jpg', this)"
+          title="Complete on Model — Complete 3-piece luxury ensemble styled on model">
+          <img src="/static/images/emerald-silk-model.jpg" alt="Complete on Model" />
+          <span class="pdp-thumb-title">Complete on Model</span>
+        </div>
+        
+        <div 
+          class="pdp-thumb "
+          onclick="selectGalleryImage('emerald-silk-side.jpg', this)"
+          title="Side Drape Detail — Close-up perspective of fabric drape and sleeve finish">
+          <img src="/static/images/emerald-silk-side.jpg" alt="Side Drape Detail" />
+          <span class="pdp-thumb-title">Side Drape Detail</span>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Right: Product Details & Variant Selectors -->
+  <div class="pdp-info">
+    <span class="pdp-badge">Party Wear — Party</span>
+    <h2 class="pdp-title">Luxury Emerald Green – Moos Embellished Silk Ensemble</h2>
+    <p style="font-size: 14px; color: var(--color-text-muted); font-weight: 500;">Exquisite Emerald Green 3-Piece Ensemble with Delicate All-Over Moos Work</p>
+
+    <div class="pdp-price-wrap">
+      <span class="pdp-sale-price" id="pdp-price-display" data-price-pkr="34400">Rs. 34,400</span>
+      <span class="pdp-base-price" data-price-pkr="43000">Rs. 43,000</span>
+      <span style="background: #E8F5E9; color: #2E7D32; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;">
+        SAVE 20%
+      </span>
+    </div>
+
+    <!-- Main Description -->
+    <div class="pdp-description-box" style="font-size: 14px; color: var(--color-text-dark); line-height: 1.8;">
+      
+      <p style="margin-bottom: 10px;">Discover effortless elegance with this exquisite emerald green three-piece ensemble, thoughtfully designed to combine contemporary sophistication with luxurious traditional craftsmanship.</p>
+      
+      <p style="margin-bottom: 10px;">Featuring a graceful silhouette and delicate all-over Moos embellishment, this outfit offers a refined look with a beautiful touch of shimmer and elegance.</p>
+      
+      <p style="margin-bottom: 10px;">The subtle sparkle of the embellishments against the rich emerald green shade creates an elegant and sophisticated appearance.</p>
+      
+      <p style="margin-bottom: 10px;">Style: Luxury Contemporary Formal &amp; Festive Wear
+Perfect for festive celebrations, intimate weddings, evening gatherings and special occasions.
+Minimal in silhouette, luxurious in detail — elegance that speaks for itself.</p>
+      
+    </div>
+
+    <!-- Handcrafted Bridal Luxury Details -->
+    
+    <div class="luxury-details-card" style="background: #FAF8F5; border: 1px solid rgba(203, 178, 121, 0.45); border-radius: var(--radius-sm); padding: 18px 20px; margin: 4px 0 14px;">
+      
+      <div style="margin-bottom: 14px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #0E0D0D; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+          <span style="color: #CBB279;">✦</span> Fabric & Outfit Details
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: 13px; color: #444;">
+          
+          <div style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE;">
+            <strong style="color: #0E0D0D;">Shirt:</strong> Premium Sheesha Silk
+          </div>
+          
+          <div style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE;">
+            <strong style="color: #0E0D0D;">Trouser:</strong> Premium Sheesha Silk
+          </div>
+          
+          <div style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE;">
+            <strong style="color: #0E0D0D;">Dupatta:</strong> Elegant Medium Silk
+          </div>
+          
+        </div>
+      </div>
+      
+
+      
+      <div style="margin-bottom: 14px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #0E0D0D; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+          <span style="color: #CBB279;">✦</span> Handcrafted Embellishment
+        </div>
+        <p style="font-size: 13px; color: #333; line-height: 1.7; background: #FFF; padding: 10px 14px; border-radius: 4px; border: 1px solid #ECE7DE; margin: 0;">
+          Intricate all-over Moos (M-U-S) embellishment, beautifully embellished neckline and front detailing, delicate Moos work distributed evenly across the shirt, and refined embellishment on sleeves for a coordinated finish.
+        </p>
+      </div>
+      
+
+      
+      <div>
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #0E0D0D; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+          <span style="color: #CBB279;">✦</span> Lehenga Specifications
+        </div>
+        <ul class="pdp-specs-list">
+          
+          <li style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #CBB279; font-weight: bold;">✔</span> Graceful modern silhouette with delicate Moos (M-U-S) craftsmanship
+          </li>
+          
+          <li style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #CBB279; font-weight: bold;">✔</span> Intricate all-over Moos hand detailing
+          </li>
+          
+          <li style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #CBB279; font-weight: bold;">✔</span> Beautifully embellished neckline and front panel
+          </li>
+          
+          <li style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #CBB279; font-weight: bold;">✔</span> Refined embellishment on sleeves for a coordinated finish
+          </li>
+          
+          <li style="background: #FFF; padding: 6px 12px; border-radius: 4px; border: 1px solid #ECE7DE; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #CBB279; font-weight: bold;">✔</span> Complete 3-piece luxury ensemble (Shirt, Trouser, Dupatta)
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+    
+
+    <!-- Color Selection Swatches (Section 4 Strict Requirement) -->
+    <div class="pdp-swatches-block">
+      <h4>
+        <span>Select Color: <strong id="pdp-selected-color-name" style="color: var(--color-burgundy);">Emerald Green</strong></span>
+        <span style="font-size: 11px; color: #2E7D32;">● In Stock (<span id="pdp-stock-count">8</span> units)</span>
+      </h4>
+      <div class="pdp-swatches">
+        
+        <div 
+          class="pdp-swatch-dot active"
+          style="background-color: #1B4D3E;"
+          data-color-name="Emerald Green"
+          data-image="emerald-silk-front.jpg"
+          data-variant-id="var_emr_green"
+          data-stock="8"
+          onclick="selectVariantColor('Emerald Green', 'emerald-silk-front.jpg', 'var_emr_green', this, 8)"
+          title="Emerald Green">
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Size Selection -->
+    <div class="pdp-sizes-block">
+      <h4>
+        <span>Select Size</span>
+        <a href="#size-guide" onclick="alert('Standard International Sizing: XS (Bust 34\"), S (36\"), M (38\"), L (40\"), XL (42\"). Custom stitching also available.')" style="font-size: 11px; color: var(--color-gold); text-decoration: underline;">Size Guide</a>
+      </h4>
+      <div class="pdp-sizes" id="pdp-size-buttons">
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn active"
+          onclick="selectSize('XS', this)">
+          XS
+        </button>
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn "
+          onclick="selectSize('S', this)">
+          S
+        </button>
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn "
+          onclick="selectSize('M', this)">
+          M
+        </button>
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn "
+          onclick="selectSize('L', this)">
+          L
+        </button>
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn "
+          onclick="selectSize('XL', this)">
+          XL
+        </button>
+        
+        <button 
+          type="button" 
+          class="pdp-size-btn "
+          onclick="selectSize('Custom Stitched', this)">
+          Custom Stitched
+        </button>
+        
+      </div>
+    </div>
+
+    <!-- Hidden state inputs -->
+    <input type="hidden" id="pdp-selected-color" value="Emerald Green" />
+    <input type="hidden" id="pdp-selected-image" value="emerald-silk-front.jpg" />
+    <input type="hidden" id="pdp-selected-variant-id" value="var_emr_green" />
+    <input type="hidden" id="pdp-selected-size" value="XS" />
+
+    <!-- Quantity & Action Buttons -->
+    <div class="pdp-actions">
+      <div class="pdp-qty">
+        <button type="button" onclick="changeQty(-1)">-</button>
+        <input type="number" id="pdp-qty-val" value="1" min="1" max="10" readonly />
+        <button type="button" onclick="changeQty(1)">+</button>
+      </div>
+      <button type="button" class="btn-cart" onclick="pdpAddToCart()">
+        ADD TO BAG
+      </button>
+      <button type="button" class="btn-buynow" onclick="pdpBuyNow()">
+        BUY NOW
+      </button>
+    </div>
+
+    <!-- Manual Payment Options Notice -->
+    <div class="advance-notice" style="background: #FAF8F5; border: 1px solid #E8E2D9; border-left: 3px solid #BFA15F;">
+      <strong style="color: #0E0D0D;">Official Manual Payment Options</strong>
+      Accepted via <strong>Bank Transfer (UBL), Easypaisa, and JazzCash</strong>. Every payment is manually verified by the business before order confirmation and dispatch.
+    </div>
+
+    <!-- Product Specifications Accordion -->
+    <div style="border-top: 1px solid var(--color-border); padding-top: 18px; margin-top: 10px;">
+      <h4 style="font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Product Specifications</h4>
+      <div class="pdp-meta-grid">
+        <span>SKU:</span> <strong style="color: var(--color-text-dark);">JUM-PRT-001</strong>
+        <span>Fabric:</span> <strong style="color: var(--color-text-dark);">Shirt: Premium Sheesha Silk | Trouser: Premium Sheesha Silk | Dupatta: Elegant Medium Silk</strong>
+        <span>Care:</span> <strong style="color: var(--color-text-dark);">Professional Dry Clean Only. Preserve in Jumma Couture luxury garment bag.</strong>
+        <span>Occasion:</span> <strong style="color: var(--color-text-dark);">Party</strong>
+        <span>Authenticity:</span> <strong style="color: var(--color-text-dark);">100% Certified Jumma Couture By Noman Masterpiece</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Reviews Section -->
+<section style="max-width: 1380px; margin: 40px auto 70px; padding: 0 24px;">
+  <div class="section-header">
+    <h3 class="section-title">Verified Patron Reviews</h3>
+    <p class="section-subtitle">Real experiences from our distinguished international clientele</p>
+  </div>
+
+  <div class="pdp-reviews-grid">
+    
+  </div>
+</section>
+
+  </main>
+
+  <!-- Luxury Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div style="margin-bottom: 12px;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 48px; max-width: 240px; object-fit: contain; background: #FFFFFF; padding: 4px 8px; border-radius: 4px;" />
+        </div>
+        <p>Celebrating timeless sophistication and regal craftsmanship through bespoke bridal, festive, and formal luxury ensembles. Designed for connoisseurs across Pakistan, UAE, UK, USA, and worldwide.</p>
+        <div style="font-size: 12px; color: var(--color-gold);">
+          Customer Support: concierge@jummacouturebynoman.com<br />
+          WhatsApp VIP: +92 300 1234567
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul class="footer-links">
+          <li><a href="/shop?category=Lehengas">Bridal Lehengas</a></li>
+          <li><a href="/shop?category=Sarees">Embellished Sarees</a></li>
+          <li><a href="/shop?category=Kurtas">Silk Kurta Sets</a></li>
+          <li><a href="/shop?category=Accessories">Handcrafted Velvet Potlis</a></li>
+          <li><a href="/categories">Shop by Occasion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="/track-order">Track My Order</a></li>
+          <li><a href="/about">Artisan Spotlight & Brand Story</a></li>
+          <li><a href="/contact">Contact Concierge</a></li>
+          <li><a href="/faq">Frequently Asked Questions</a></li>
+          <li><a href="/policies/shipping">Worldwide Shipping Policy</a></li>
+          <li><a href="/policies/returns">Return & Refund Policy</a></li>
+          <li><a href="/policies/privacy">Privacy & Security</a></li>
+          <li><a href="/policies/terms">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Exclusive Previews</h4>
+        <p>Join the Jumma Couture VIP circle to receive private invitations to seasonal edits and artisan trunk shows.</p>
+        <form action="/subscribe" method="POST" class="newsletter-form">
+          <input type="email" name="email" class="newsletter-input" placeholder="Your Email Address" required />
+          <button type="submit" class="newsletter-btn">JOIN</button>
+        </form>
+
+        <div class="footer-payments">
+          <div class="footer-payments-title">Official Payment Options</div>
+          <div class="payment-logos" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 11px; font-weight: 700; color: #0E0D0D; background: #FAF8F5; border: 1px solid #D9D2C7; padding: 4px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">🏦 Bank Transfer (UBL)</span>
+            <img src="/static/images/easypaisa.png" alt="Easypaisa" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#00A859;\'>Easypaisa</span>'" />
+            <img src="/static/images/jazzcash.png" alt="JazzCash" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#EE2A24;\'>JazzCash</span>'" />
+          </div>
+          <div style="font-size: 11px; color: #9A8E85; margin-top: 8px;">
+            Manual payment verification by business owner. Transfer via Bank, Easypaisa, or JazzCash.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Jumma Couture by Noman. All Rights Reserved.</div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="/admin/orders" style="color: #CBB279; font-weight: 600;">Owner Admin Portal</a>
+        <a href="/policies/privacy">Privacy Policy</a>
+        <a href="/policies/terms">Terms of Service</a>
+        <a href="/policies/shipping">Shipping Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+  
+<script>
+function selectGalleryImage(image, elem) {
+  document.querySelectorAll('.pdp-gallery-thumbnails .pdp-thumb').forEach(t => t.classList.remove('active'));
+  if (elem) elem.classList.add('active');
+
+  const mainImg = document.getElementById('pdp-main-image');
+  if (mainImg) {
+    mainImg.style.transition = 'opacity 0.2s ease-in-out';
+    mainImg.style.opacity = '0.3';
+    setTimeout(() => {
+      mainImg.src = `/static/images/${image}`;
+      mainImg.style.opacity = '1';
+    }, 120);
+  }
+}
+
+function selectVariantColor(name, image, variantId, elem, stock = 8) {
+  document.querySelectorAll('.pdp-swatch-dot').forEach(d => {
+    if (d.getAttribute('data-image') === image || d.getAttribute('data-color-name') === name) {
+      d.classList.add('active');
+    } else {
+      d.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('.pdp-thumb').forEach(t => {
+    const img = t.querySelector('img');
+    if (img && img.getAttribute('src').includes(image)) {
+      t.classList.add('active');
+    } else {
+      t.classList.remove('active');
+    }
+  });
+
+  const mainImg = document.getElementById('pdp-main-image');
+  if (mainImg) {
+    mainImg.style.transition = 'opacity 0.2s ease-in-out';
+    mainImg.style.opacity = '0.3';
+    setTimeout(() => {
+      mainImg.src = `/static/images/${image}`;
+      mainImg.style.opacity = '1';
+    }, 120);
+  }
+
+  const colorNameEl = document.getElementById('pdp-selected-color-name');
+  if (colorNameEl) colorNameEl.textContent = name;
+  document.getElementById('pdp-selected-color').value = name;
+  document.getElementById('pdp-selected-image').value = image;
+  document.getElementById('pdp-selected-variant-id').value = variantId;
+  const stockEl = document.getElementById('pdp-stock-count');
+  if (stockEl) stockEl.textContent = stock;
+}
+
+function selectSize(size, btn) {
+  document.querySelectorAll('.pdp-size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pdp-selected-size').value = size;
+}
+
+function changeQty(delta) {
+  const input = document.getElementById('pdp-qty-val');
+  let current = parseInt(input.value) || 1;
+  current = Math.max(1, Math.min(10, current + delta));
+  input.value = current;
+}
+
+function pdpAddToCart() {
+  const item = {
+    slug: 'luxury-emerald-green-moos-embellished-silk-ensemble',
+    title: 'Luxury Emerald Green – Moos Embellished Silk Ensemble',
+    price: 34400,
+    image: document.getElementById('pdp-selected-image').value,
+    color: document.getElementById('pdp-selected-color').value,
+    size: document.getElementById('pdp-selected-size').value,
+    variant_id: document.getElementById('pdp-selected-variant-id').value,
+    qty: parseInt(document.getElementById('pdp-qty-val').value) || 1
+  };
+  addToCart(item);
+}
+
+function pdpBuyNow() {
+  pdpAddToCart();
+  window.location.href = '/checkout';
+}
+</script>
+
+</body>
+</html>

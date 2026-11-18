@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Patron Dashboard | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner">
+  <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">Private VIP
+    Concierge</span>
+  <h2 style="margin-top: 4px;">Welcome, {{ current_user.name }}</h2>
+  <p>Manage your profile, tracked 100% advance orders, and luxury wishlist</p>
+</div>
+
+<div class="dashboard-layout-grid">
+  <!-- Sidebar -->
+  <aside class="checkout-card" style="height: fit-content; padding: 20px;">
+    <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 16px; margin-bottom: 16px;">
+      <strong style="color: var(--color-burgundy); font-size: 16px;">{{ current_user.name }}</strong>
+      <div style="font-size: 12px; color: var(--color-text-muted);">{{ current_user.email }}</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+      <a href="/account"
+        style="padding: 8px 12px; background: var(--color-cream); color: var(--color-burgundy); font-weight: 700; border-radius: 4px;">Dashboard
+        Overview</a>
+      <a href="/account/orders" style="padding: 8px 12px; color: var(--color-text-dark);">My Orders ({{ orders|length
+        }})</a>
+      <a href="/wishlist" style="padding: 8px 12px; color: var(--color-text-dark);">Wishlist</a>
+      <a href="/track-order" style="padding: 8px 12px; color: var(--color-text-dark);">Live Tracking</a>
+      <a href="/logout"
+        style="padding: 8px 12px; color: #C02626; margin-top: 20px; border-top: 1px solid var(--color-border);">Log
+        Out</a>
+    </div>
+  </aside>
+
+  <!-- Main Panel -->
+  <main>
+    <!-- Stats Row -->
+    <div class="dashboard-stats-grid">
+      <div class="checkout-card" style="padding: 20px; text-align: center;">
+        <span
+          style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700;">Total
+          Orders</span>
+        <h3 style="font-family: var(--font-serif); font-size: 28px; color: var(--color-burgundy); margin-top: 4px;">{{
+          orders|length }}</h3>
+      </div>
+
+      <div class="checkout-card" style="padding: 20px; text-align: center;">
+        <span
+          style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700;">Payment
+          Status</span>
+        <h3 style="font-family: var(--font-serif); font-size: 22px; color: #1B5E20; margin-top: 4px;">100% Advance</h3>
+      </div>
+
+      <div class="checkout-card" style="padding: 20px; text-align: center;">
+        <span
+          style="font-size: 11px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700;">Default
+          Country</span>
+        <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--color-burgundy); margin-top: 4px;">{{
+          current_user.country or 'Pakistan' }}</h3>
+      </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="checkout-card">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--color-border); padding-bottom: 12px;">
+        <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--color-burgundy);">Recent Luxury Orders
+        </h3>
+        <a href="/account/orders" style="font-size: 12px; color: var(--color-burgundy); font-weight: 700;">View All
+          →</a>
+      </div>
+
+      {% if orders %}
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        {% for ord in orders[:3] %}
+        <div
+          style="border: 1px solid var(--color-border); border-radius: 4px; padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong style="color: var(--color-burgundy); font-size: 15px;">{{ ord.order_number }}</strong>
+            <div style="font-size: 12px; color: var(--color-text-muted);">{{ ord.created_at }} &bull; Paid via {{
+              ord.payment_method|upper }}</div>
+          </div>
+          <div>
+            <span
+              style="background: #E8F5E9; color: #1B5E20; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">
+              ✓ 100% Full Advance Paid
+            </span>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: 700; font-size: 15px; color: var(--color-burgundy);">Rs. {{
+              "{:,}".format(ord.total_amount|int) }}</div>
+            <a href="/track-order?order={{ ord.order_number }}"
+              style="font-size: 11px; color: var(--color-gold); font-weight: 700; text-decoration: underline;">Track
+              Order</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p style="color: var(--color-text-muted); font-size: 13px; padding: 20px 0;">No previous orders found. Start
+        exploring our couture collections today!</p>
+      <a href="/shop" class="btn-primary" style="font-size: 11px; padding: 10px 20px;">Explore Catalog</a>
+      {% endif %}
+    </div>
+
+    <!-- Saved Address Card -->
+    <div class="checkout-card" style="margin-top: 30px;">
+      <h3 class="checkout-section-title">Saved Shipping Address</h3>
+      <p style="font-size: 13px; color: var(--color-text-dark); line-height: 1.8;">
+        <strong>Recipient:</strong> {{ current_user.name }}<br />
+        <strong>Address:</strong> {{ current_user.address or 'Suite 14, Royal Palms Boulevard' }}<br />
+        <strong>City & Country:</strong> {{ current_user.city or 'Lahore' }}, {{ current_user.country or 'Pakistan' }}
+        ({{ current_user.postal_code or '54000' }})<br />
+        <strong>Phone:</strong> {{ current_user.phone or '+92 300 1234567' }}
+      </p>
+    </div>
+  </main>
+</div>
+{% endblock %}

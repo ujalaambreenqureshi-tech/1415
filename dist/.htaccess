@@ -1,0 +1,14 @@
+# GoogieHost / Apache Configuration
+RewriteEngine On
+RewriteBase /
+
+# Explicit API Checkout routing to PHP handler
+RewriteRule ^api/checkout/?$ api/checkout/index.php [L,QSA]
+
+# Remove .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^.]+)$ $1.html [NC,L]
+
+# Custom Error Document
+ErrorDocument 404 /index.html

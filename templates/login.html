@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Client Sign In | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div style="max-width: 480px; margin: 60px auto 100px; padding: 0 24px;">
+  <div class="checkout-card" style="padding: 36px;">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <h2 style="font-family: var(--font-serif); font-size: 28px; color: var(--color-burgundy);">Patron Sign In</h2>
+      <p style="font-size: 13px; color: var(--color-text-muted); margin-top: 4px;">Access your private orders, addresses, and curated wishlist</p>
+    </div>
+
+    {% if error %}
+    <div style="background: #FDEDED; color: #D32F2F; padding: 10px 14px; border-radius: 4px; font-size: 13px; margin-bottom: 18px;">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" value="vip@jummacouturebynoman.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" value="JummaCouture2026!" required />
+      </div>
+
+      <button type="submit" class="btn-checkout" style="padding: 14px; margin-top: 10px;">
+        SIGN IN TO ACCOUNT
+      </button>
+
+      <div style="text-align: center; margin-top: 18px; font-size: 13px; color: var(--color-text-muted);">
+        Don't have an account yet? <a href="/register" style="color: var(--color-burgundy); font-weight: 700;">Create One Here</a>
+      </div>
+
+      <div style="margin-top: 24px; padding: 12px; background: #FAF7F2; border-radius: 4px; font-size: 11px; color: var(--color-text-muted);">
+        <strong>Demo Staging Account:</strong><br />
+        Email: <code>vip@jummacouturebynoman.com</code><br />
+        Password: <code>JummaCouture2026!</code>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

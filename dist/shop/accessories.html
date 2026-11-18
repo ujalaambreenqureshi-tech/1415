@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop All Collections | Jumma Couture by Noman</title>
+  <meta name="description" content="Curated ethnic wear that celebrates your heritage. Handcrafted luxury sarees, lehengas, kurtas, and velvet potlis for international patrons." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-announcement">
+        ✨ Worldwide Express Delivery | Handcrafted Luxury Ethnic Couture
+      </div>
+      <div class="top-controls">
+        <div class="currency-selector">
+          <select class="currency-select" aria-label="Select Currency">
+            <option value="PKR">PKR (Rs.)</option>
+            <option value="USD">USD ($)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="AED">AED (AED)</option>
+            <option value="SAR">SAR (SAR)</option>
+            <option value="CAD">CAD (C$)</option>
+            <option value="AUD">AUD (A$)</option>
+          </select>
+        </div>
+        <div class="lang-selector">
+          <select aria-label="Select Language">
+            <option value="en">English</option>
+            <option value="ar">العربية (Arabic)</option>
+            <option value="ur">اردو (Urdu)</option>
+          </select>
+        </div>
+        <div style="font-size: 11px;">
+          
+            <a href="/login" style="color: #CBB279; font-weight: 700;">Sign In</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Luxury Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="header-left">
+        <button class="mobile-toggle" aria-label="Open Navigation">☰</button>
+        <button class="action-icon" onclick="toggleSearchModal()" aria-label="Search Catalog" title="Search">
+          🔍
+        </button>
+      </div>
+
+      <div class="brand-logo">
+        <a href="/" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 52px; max-width: 250px; object-fit: contain;" />
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <a href="/wishlist" class="action-icon" aria-label="Wishlist" title="My Wishlist">
+          ♡
+          <span class="action-badge wishlist-badge-count">0</span>
+        </a>
+        <button class="action-icon" onclick="openCartDrawer()" aria-label="Shopping Bag" title="Shopping Bag">
+          👜
+          <span class="action-badge cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Search Dropdown -->
+    <div id="search-modal" class="search-modal">
+      <form action="/search" method="GET" class="search-form">
+        <input type="text" name="q" class="search-input" placeholder="Search lehengas, organza sarees, pure silk kurtas..." />
+        <button type="submit" class="search-btn">SEARCH</button>
+      </form>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+      <ul class="nav-container">
+        <li class="nav-item"><a href="/" class="">HOME</a></li>
+        <li class="nav-item"><a href="/shop" class="">COLLECTIONS</a></li>
+        <li class="nav-item"><a href="/shop?occasion=Bridal" class="" style="color: var(--color-gold); font-weight: 700;">BRIDAL</a></li>
+        <li class="nav-item"><a href="/party" class="" style="color: #D4AF37; font-weight: 700;">PARTY WEAR</a></li>
+        <li class="nav-item"><a href="/shop?category=Lehengas" class="">LEHENGAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Sarees" class="">SAREES</a></li>
+        <li class="nav-item"><a href="/shop?category=Kurtas" class="">KURTAS</a></li>
+        <li class="nav-item"><a href="/shop?category=Accessories" class="active">ACCESSORIES</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="drawer-header">
+      <h3>Shopping Bag (<span class="cart-badge-count">0</span>)</h3>
+      <button class="drawer-close" onclick="closeCartDrawer()">&times;</button>
+    </div>
+    <div id="drawer-items-list" class="drawer-body">
+      <!-- Items populated dynamically via JS -->
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-subtotal-row">
+        <span>Subtotal</span>
+        <span id="drawer-subtotal-val">Rs. 0</span>
+      </div>
+      <a href="/checkout" class="btn-checkout">Proceed to Checkout</a>
+      <a href="/cart" style="display: block; text-align: center; font-size: 11px; margin-top: 10px; text-decoration: underline; color: var(--color-text-muted);">View Full Shopping Cart</a>
+    </div>
+  </aside>
+
+  <!-- Main Body Content -->
+  <main>
+    
+<div class="page-hero-banner">
+  <h2>Couture Collections</h2>
+  <p>Handcrafted luxury ethnic wear for discerning global patrons</p>
+</div>
+
+<div class="shop-layout-grid">
+  <!-- Sidebar Filters -->
+  <aside class="shop-sidebar">
+    <h3
+      style="font-family: var(--font-serif); font-size: 18px; color: var(--color-burgundy); margin-bottom: 20px; border-bottom: 1px solid var(--color-border); padding-bottom: 8px;">
+      Filters</h3>
+
+    <!-- Category Filter -->
+    <div style="margin-bottom: 24px;">
+      <h4
+        style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+        Category</h4>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+        <a href="/shop"
+          style="color: var(--color-text-muted);">All
+          Categories (3)</a>
+        <a href="/shop?category=Lehengas"
+          style="color: var(--color-text-muted);">Lehengas</a>
+        <a href="/shop?category=Sarees"
+          style="color: var(--color-text-muted);">Sarees</a>
+        <a href="/shop?category=Kurtas"
+          style="color: var(--color-text-muted);">Silk
+          Kurtas & Anarkalis</a>
+        <a href="/shop?category=Accessories"
+          style="color: var(--color-burgundy); font-weight: 700;">Handcrafted
+          Velvet Potlis</a>
+      </div>
+    </div>
+
+    <!-- Occasion Filter -->
+    <div style="margin-bottom: 24px;">
+      <h4
+        style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">
+        Occasion</h4>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+        <a href="/shop?occasion=Bridal" style="color: var(--color-text-muted);">✦ Bridal Couture</a>
+        <a href="/shop?occasion=Wedding" style="color: var(--color-text-muted);">Wedding Ensembles</a>
+        <a href="/shop?occasion=Festive" style="color: var(--color-text-muted);">Festive Eid & Celebrations</a>
+        <a href="/shop?occasion=Party" style="color: var(--color-text-muted);">Party & Evening</a>
+        <a href="/shop?occasion=Mehendi" style="color: var(--color-text-muted);">Mehendi & Sangeet</a>
+        <a href="/shop?occasion=Everyday" style="color: var(--color-text-muted);">Everyday Luxury</a>
+      </div>
+    </div>
+
+
+  </aside>
+
+  <!-- Product Listing -->
+  <main>
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border);">
+      <span style="font-size: 14px; color: var(--color-text-muted);">Showing <strong>3</strong>
+        handcrafted creations</span>
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px;">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" onchange="window.location.href='/shop?sort=' + this.value"
+          style="padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 4px; background: #FFF; outline: none;">
+          <option value="featured">Featured First</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="newest">New Arrivals</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid" style="padding: 0;">
+      
+      <div class="product-card">
+        
+        <span class="product-badge">Bestseller</span>
+        
+
+        <button class="wishlist-toggle" data-wishlist-slug="blush-pearl-embroidered-potli"
+          onclick="toggleWishlist('blush-pearl-embroidered-potli', 'Blush Pearl Embroidered Potli')">
+          ♡
+        </button>
+
+        <a href="/product/blush-pearl-embroidered-potli" class="product-img-wrap">
+          <img src="/static/images/potli-gold.jpg" alt="Blush Pearl Embroidered Potli" />
+        </a>
+
+        <div class="product-details">
+          <a href="/product/blush-pearl-embroidered-potli">
+            <h4 class="product-title">Blush Pearl Embroidered Potli</h4>
+          </a>
+          <p class="product-subtitle">Handcrafted Zari &amp; Freshwater Pearl Tassel Evening Bag</p>
+
+          <!-- Color Swatches (Section 4 Strict Requirement) -->
+          <div class="color-swatches">
+            
+            <div class="color-swatch-dot active"
+              style="background-color: #E8A598;" data-color-name="Blush Rose"
+              data-image="potli-gold.jpg" data-variant-id="var_potli_blush" title="Blush Rose">
+            </div>
+            
+          </div>
+
+          <div class="product-price-row">
+            <span class="sale-price" data-price-pkr="4999">Rs. 4,999</span>
+            <span class="base-price" data-price-pkr="6499">Rs. 6,499</span>
+          </div>
+
+          <div class="product-card-actions">
+            <button class="btn-card-action btn-add-bag" onclick="addToCart({
+                slug: 'blush-pearl-embroidered-potli',
+                title: 'Blush Pearl Embroidered Potli',
+                price: 4999,
+                image: 'potli-gold.jpg',
+                color: 'Blush Rose',
+                size: 'One Size',
+                qty: 1
+              })">
+              ADD TO BAG
+            </button>
+            <button class="btn-card-action btn-buy-now" onclick="buyNow({
+                slug: 'blush-pearl-embroidered-potli',
+                title: 'Blush Pearl Embroidered Potli',
+                price: 4999,
+                image: 'potli-gold.jpg',
+                color: 'Blush Rose',
+                size: 'One Size',
+                qty: 1
+              })">
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        
+        <span class="product-badge">New Arrival</span>
+        
+
+        <button class="wishlist-toggle" data-wishlist-slug="royal-maroon-velvet-potli"
+          onclick="toggleWishlist('royal-maroon-velvet-potli', 'Royal Embroidered Velvet Potli')">
+          ♡
+        </button>
+
+        <a href="/product/royal-maroon-velvet-potli" class="product-img-wrap">
+          <img src="/static/images/potli-gold.jpg" alt="Royal Embroidered Velvet Potli" />
+        </a>
+
+        <div class="product-details">
+          <a href="/product/royal-maroon-velvet-potli">
+            <h4 class="product-title">Royal Embroidered Velvet Potli</h4>
+          </a>
+          <p class="product-subtitle">Antique Gold Zardozi &amp; Pearl Tassel Evening Pouch</p>
+
+          <!-- Color Swatches (Section 4 Strict Requirement) -->
+          <div class="color-swatches">
+            
+            <div class="color-swatch-dot active"
+              style="background-color: #D4AF37;" data-color-name="Muted Gold"
+              data-image="potli-gold.jpg" data-variant-id="var_ptl_gold" title="Muted Gold">
+            </div>
+            
+          </div>
+
+          <div class="product-price-row">
+            <span class="sale-price" data-price-pkr="2999">Rs. 2,999</span>
+            <span class="base-price" data-price-pkr="3499">Rs. 3,499</span>
+          </div>
+
+          <div class="product-card-actions">
+            <button class="btn-card-action btn-add-bag" onclick="addToCart({
+                slug: 'royal-maroon-velvet-potli',
+                title: 'Royal Embroidered Velvet Potli',
+                price: 2999,
+                image: 'potli-gold.jpg',
+                color: 'Muted Gold',
+                size: 'Standard (8 x 9.5 inches)',
+                qty: 1
+              })">
+              ADD TO BAG
+            </button>
+            <button class="btn-card-action btn-buy-now" onclick="buyNow({
+                slug: 'royal-maroon-velvet-potli',
+                title: 'Royal Embroidered Velvet Potli',
+                price: 2999,
+                image: 'potli-gold.jpg',
+                color: 'Muted Gold',
+                size: 'Standard (8 x 9.5 inches)',
+                qty: 1
+              })">
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        
+
+        <button class="wishlist-toggle" data-wishlist-slug="zari-velvet-potli-bag"
+          onclick="toggleWishlist('zari-velvet-potli-bag', 'Zari Velvet Potli Bag')">
+          ♡
+        </button>
+
+        <a href="/product/zari-velvet-potli-bag" class="product-img-wrap">
+          <img src="/static/images/potli-gold.jpg" alt="Zari Velvet Potli Bag" />
+        </a>
+
+        <div class="product-details">
+          <a href="/product/zari-velvet-potli-bag">
+            <h4 class="product-title">Zari Velvet Potli Bag</h4>
+          </a>
+          <p class="product-subtitle">Micro-Sequin &amp; Beaded Tassel Evening Pouch</p>
+
+          <!-- Color Swatches (Section 4 Strict Requirement) -->
+          <div class="color-swatches">
+            
+            <div class="color-swatch-dot active"
+              style="background-color: #D4AF37;" data-color-name="Muted Gold"
+              data-image="potli-gold.jpg" data-variant-id="var_acc_potli" title="Muted Gold">
+            </div>
+            
+          </div>
+
+          <div class="product-price-row">
+            <span class="sale-price" data-price-pkr="2499">Rs. 2,499</span>
+            <span class="base-price" data-price-pkr="2999">Rs. 2,999</span>
+          </div>
+
+          <div class="product-card-actions">
+            <button class="btn-card-action btn-add-bag" onclick="addToCart({
+                slug: 'zari-velvet-potli-bag',
+                title: 'Zari Velvet Potli Bag',
+                price: 2499,
+                image: 'potli-gold.jpg',
+                color: 'Muted Gold',
+                size: 'Standard (8 x 9.5 inches)',
+                qty: 1
+              })">
+              ADD TO BAG
+            </button>
+            <button class="btn-card-action btn-buy-now" onclick="buyNow({
+                slug: 'zari-velvet-potli-bag',
+                title: 'Zari Velvet Potli Bag',
+                price: 2499,
+                image: 'potli-gold.jpg',
+                color: 'Muted Gold',
+                size: 'Standard (8 x 9.5 inches)',
+                qty: 1
+              })">
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+</div>
+
+  </main>
+
+  <!-- Luxury Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div style="margin-bottom: 12px;">
+          <img src="/static/images/jumma-couture-logo-header.png" alt="Jumma Couture by Noman" style="height: 48px; max-width: 240px; object-fit: contain; background: #FFFFFF; padding: 4px 8px; border-radius: 4px;" />
+        </div>
+        <p>Celebrating timeless sophistication and regal craftsmanship through bespoke bridal, festive, and formal luxury ensembles. Designed for connoisseurs across Pakistan, UAE, UK, USA, and worldwide.</p>
+        <div style="font-size: 12px; color: var(--color-gold);">
+          Customer Support: concierge@jummacouturebynoman.com<br />
+          WhatsApp VIP: +92 300 1234567
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul class="footer-links">
+          <li><a href="/shop?category=Lehengas">Bridal Lehengas</a></li>
+          <li><a href="/shop?category=Sarees">Embellished Sarees</a></li>
+          <li><a href="/shop?category=Kurtas">Silk Kurta Sets</a></li>
+          <li><a href="/shop?category=Accessories">Handcrafted Velvet Potlis</a></li>
+          <li><a href="/categories">Shop by Occasion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="/track-order">Track My Order</a></li>
+          <li><a href="/about">Artisan Spotlight & Brand Story</a></li>
+          <li><a href="/contact">Contact Concierge</a></li>
+          <li><a href="/faq">Frequently Asked Questions</a></li>
+          <li><a href="/policies/shipping">Worldwide Shipping Policy</a></li>
+          <li><a href="/policies/returns">Return & Refund Policy</a></li>
+          <li><a href="/policies/privacy">Privacy & Security</a></li>
+          <li><a href="/policies/terms">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Exclusive Previews</h4>
+        <p>Join the Jumma Couture VIP circle to receive private invitations to seasonal edits and artisan trunk shows.</p>
+        <form action="/subscribe" method="POST" class="newsletter-form">
+          <input type="email" name="email" class="newsletter-input" placeholder="Your Email Address" required />
+          <button type="submit" class="newsletter-btn">JOIN</button>
+        </form>
+
+        <div class="footer-payments">
+          <div class="footer-payments-title">Official Payment Options</div>
+          <div class="payment-logos" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 11px; font-weight: 700; color: #0E0D0D; background: #FAF8F5; border: 1px solid #D9D2C7; padding: 4px 9px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">🏦 Bank Transfer (UBL)</span>
+            <img src="/static/images/easypaisa.png" alt="Easypaisa" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#00A859;\'>Easypaisa</span>'" />
+            <img src="/static/images/jazzcash.png" alt="JazzCash" class="payment-logo-img" onerror="this.outerHTML='<span style=\'font-size:11px;font-weight:700;color:#EE2A24;\'>JazzCash</span>'" />
+          </div>
+          <div style="font-size: 11px; color: #9A8E85; margin-top: 8px;">
+            Manual payment verification by business owner. Transfer via Bank, Easypaisa, or JazzCash.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Jumma Couture by Noman. All Rights Reserved.</div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="/admin/orders" style="color: #CBB279; font-weight: 600;">Owner Admin Portal</a>
+        <a href="/policies/privacy">Privacy Policy</a>
+        <a href="/policies/terms">Terms of Service</a>
+        <a href="/policies/shipping">Shipping Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,328 @@
+{% extends "base.html" %}
+
+{% block title %}Jumma Couture By Noman — Official Luxury Storefront{% endblock %}
+
+{% block content %}
+<!-- Full Picture Slideshow (Replacing static Timeless Tradition section per user request) -->
+<section class="luxury-slideshow-section" style="margin-top: 10px; margin-bottom: 40px;">
+  <div class="slideshow-wrapper">
+    <div class="slideshow-slides" id="luxury-slides-container">
+      <!-- Slide 1: Emerald & Gold Bridal Lehenga (User's Model Image) -->
+      <div class="slideshow-slide active">
+        <div class="slide-grid">
+          <div class="slide-info-col">
+            <span class="slide-tag">✦ Handcrafted Bridal Elegance ✦</span>
+            <h2 class="slide-heading">Luxury Deep Teal Lehenga</h2>
+            <p class="slide-description">An exquisite masterpiece in rich Deep Teal Sheesha Silk, hand-embellished with Japanese Cut Dana, Kora Dabka work & 180-inch grand flare.</p>
+            <div class="slide-price-row">
+              <span class="slide-price" data-price-pkr="184000">Rs. 184,000</span>
+              <span class="slide-original-price" data-price-pkr="230000">Rs. 230,000</span>
+              <span class="slide-discount-badge">20% OFF</span>
+            </div>
+            <div class="slide-actions">
+              <a href="/product/zari-embroidered-lehenga" class="btn-primary">
+                VIEW BRIDAL LEHENGA & ALL PICS →
+              </a>
+            </div>
+          </div>
+          <a href="/product/zari-embroidered-lehenga" class="slide-media-col" title="Click to view details and all remaining photos">
+            <img src="/static/images/emerald-gold-lehenga.jpg" alt="Luxury Deep Teal Lehenga – Handcrafted Bridal Elegance"
+              class="slide-model-photo" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 2: Embellished Organza Sarees -->
+      <div class="slideshow-slide">
+        <div class="slide-grid">
+          <div class="slide-info-col">
+            <span class="slide-tag">✦ Festive Celebrations ✦</span>
+            <h2 class="slide-heading">Embellished Organza Sarees</h2>
+            <p class="slide-description">Whisper-light Japanese organza drapes featuring intricate gotta patti floral
+              vines, micro-sequins, and hand-tasseled scalloped borders.</p>
+            <div class="slide-price-row">
+              <span class="slide-price" data-price-pkr="24999">Rs. 24,999</span>
+              <span class="slide-original-price" data-price-pkr="28999">Rs. 28,999</span>
+              <span class="slide-discount-badge">15% OFF</span>
+            </div>
+            <div class="slide-actions">
+              <a href="/product/embellished-organza-saree" class="btn-primary">
+                EXPLORE SAREES & COLORS →
+              </a>
+            </div>
+          </div>
+          <a href="/product/embellished-organza-saree" class="slide-media-col" title="Click to view Saree details">
+            <img src="/static/images/saree-champagne.jpg" alt="Embellished Organza Saree" class="slide-model-photo" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 3: Chanderi Silk Kurta Sets -->
+      <div class="slideshow-slide">
+        <div class="slide-grid">
+          <div class="slide-info-col">
+            <span class="slide-tag">✦ Handspun Luxury ✦</span>
+            <h2 class="slide-heading">Chanderi Silk Kurta Sets</h2>
+            <p class="slide-description">Tailored 3-piece regal festive silhouettes paired with authentic Banarasi
+              brocade dupattas and hand-worked marodi necklines.</p>
+            <div class="slide-price-row">
+              <span class="slide-price" data-price-pkr="18999">Rs. 18,999</span>
+              <span class="slide-original-price" data-price-pkr="22999">Rs. 22,999</span>
+              <span class="slide-discount-badge">18% OFF</span>
+            </div>
+            <div class="slide-actions">
+              <a href="/product/handwoven-silk-kurta-set" class="btn-primary">
+                EXPLORE KURTAS & COLORS →
+              </a>
+            </div>
+          </div>
+          <a href="/product/handwoven-silk-kurta-set" class="slide-media-col" title="Click to view Kurta details">
+            <img src="/static/images/kurta-forest.jpg" alt="Chanderi Silk Kurta Set" class="slide-model-photo" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 4: Flared Anarkali Sets -->
+      <div class="slideshow-slide">
+        <div class="slide-grid">
+          <div class="slide-info-col">
+            <span class="slide-tag">✦ Royal Festive Edit ✦</span>
+            <h2 class="slide-heading">Flared Anarkali Gown Sets</h2>
+            <p class="slide-description">Opulent 24-kali flared Anarkali rendered in premium georgette and organza with
+              golden kora work and scalloped dupatta.</p>
+            <div class="slide-price-row">
+              <span class="slide-price" data-price-pkr="23999">Rs. 23,999</span>
+              <span class="slide-original-price" data-price-pkr="26999">Rs. 26,999</span>
+              <span class="slide-discount-badge">12% OFF</span>
+            </div>
+            <div class="slide-actions">
+              <a href="/product/anarkali-suit-set" class="btn-primary">
+                EXPLORE ANARKALIS & COLORS →
+              </a>
+            </div>
+          </div>
+          <a href="/product/anarkali-suit-set" class="slide-media-col" title="Click to view Anarkali details">
+            <img src="/static/images/anarkali-peach.jpg" alt="Flared Anarkali Gown" class="slide-model-photo" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="slide-btn prev" onclick="moveSlide(-1)" aria-label="Previous Slide">‹</button>
+    <button class="slide-btn next" onclick="moveSlide(1)" aria-label="Next Slide">›</button>
+
+    <!-- Pagination Dots -->
+    <div class="slideshow-dots" id="slideshow-dots-wrap">
+      <span class="slide-dot active" onclick="setSlide(0)"></span>
+      <span class="slide-dot" onclick="setSlide(1)"></span>
+      <span class="slide-dot" onclick="setSlide(2)"></span>
+      <span class="slide-dot" onclick="setSlide(3)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- Shop By Occasion (Clean Modern Photo Cards - Zero Circles) -->
+<section style="padding: 10px 0 40px;">
+  <div class="section-header">
+    <h3 class="section-title">Shop by Occasion</h3>
+    <p class="section-subtitle">Handcrafted ensembles curated for life's most cherished milestones</p>
+  </div>
+
+  <div class="occasions-container">
+    <a href="/shop?occasion=Bridal" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/emerald-gold-lehenga.jpg" alt="Bridal Couture" />
+      </div>
+      <span class="occasion-name">Bridal Couture</span>
+    </a>
+
+    <a href="/shop?occasion=Wedding" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/anarkali-yellow.jpg" alt="Wedding Ensembles" />
+      </div>
+      <span class="occasion-name">Wedding</span>
+    </a>
+
+    <a href="/shop?occasion=Festive" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/anarkali-peach.jpg" alt="Festive Celebrations" />
+      </div>
+      <span class="occasion-name">Festive</span>
+    </a>
+
+    <a href="/party" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/emerald-silk-front.jpg" alt="Party Wear & Festive Ensembles" />
+      </div>
+      <span class="occasion-name" style="color: #D4AF37; font-weight: 700;">Party Wear</span>
+    </a>
+
+    <a href="/shop?occasion=Mehendi" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/lehenga-emerald.jpg" alt="Mehendi & Mayun" />
+      </div>
+      <span class="occasion-name">Mehendi</span>
+    </a>
+
+    <a href="/shop?category=Accessories" class="occasion-card">
+      <div class="occasion-thumb">
+        <img src="/static/images/potli-gold.jpg" alt="Accessories & Potlis" />
+      </div>
+      <span class="occasion-name">Accessories</span>
+    </a>
+  </div>
+</section>
+
+<!-- Curated Collections -->
+<section style="padding: 20px 0 50px;">
+  <div class="section-header">
+    <h3 class="section-title">Curated Collections</h3>
+    <p class="section-subtitle">Discover our most coveted silhouettes, tailored for modern elegance</p>
+  </div>
+
+  <div class="collection-tabs">
+    <button class="tab-btn active" onclick="filterTab('all', this)">All Highlights</button>
+    <button class="tab-btn" onclick="filterTab('bridal', this)">Bridal Couture</button>
+    <button class="tab-btn" onclick="filterTab('lehengas', this)">Lehengas</button>
+    <button class="tab-btn" onclick="filterTab('sarees', this)">Sarees</button>
+    <button class="tab-btn" onclick="filterTab('kurtas', this)">Silk Kurtas</button>
+    <button class="tab-btn" onclick="filterTab('accessories', this)">Velvet Potlis</button>
+  </div>
+
+  <div class="products-grid" id="homepage-products-grid">
+    {% for product in featured_products %}
+    {% if product.category != 'Jewelry' and product.category != 'Footwear' %}
+    <div class="product-card" data-category="{{ product.category|lower }} {% if product.is_bridal or product.occasion == 'Bridal' %}bridal{% endif %}">
+      {% if product.is_bestseller %}
+      <span class="product-badge">Bestseller</span>
+      {% elif product.is_new %}
+      <span class="product-badge">New Arrival</span>
+      {% endif %}
+
+      <button class="wishlist-toggle" data-wishlist-slug="{{ product.slug }}"
+        onclick="toggleWishlist('{{ product.slug }}', '{{ product.title }}')" title="Save to Wishlist">
+        ♡
+      </button>
+
+      <a href="/product/{{ product.slug }}" class="product-img-wrap">
+        <img src="/static/images/{{ product.colors[0].image }}" alt="{{ product.title }}"
+          id="card-img-{{ product.id }}" />
+      </a>
+
+      <div class="product-details">
+        <a href="/product/{{ product.slug }}">
+          <h4 class="product-title">{{ product.title }}</h4>
+        </a>
+        <p class="product-subtitle">{{ product.subtitle }}</p>
+
+        <!-- Circular Color Swatches -->
+        <div class="color-swatches" title="Select color to preview">
+          {% for color in product.colors %}
+          <div class="color-swatch-dot {% if loop.first %}active{% endif %}" style="background-color: {{ color.hex }};"
+            data-color-name="{{ color.name }}" data-image="{{ color.image }}" data-variant-id="{{ color.variant_id }}"
+            title="{{ color.name }}">
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="product-price-row">
+          <span class="sale-price" data-price-pkr="{{ product.sale_price_pkr }}">Rs. {{
+            "{:,}".format(product.sale_price_pkr) }}</span>
+          <span class="base-price" data-price-pkr="{{ product.base_price_pkr }}">Rs. {{
+            "{:,}".format(product.base_price_pkr) }}</span>
+        </div>
+
+        <div class="product-card-actions">
+          <button class="btn-card-action btn-add-bag" onclick="addToCart({
+              slug: '{{ product.slug }}',
+              title: '{{ product.title }}',
+              price: {{ product.sale_price_pkr }},
+              image: '{{ product.colors[0].image }}',
+              color: '{{ product.colors[0].name }}',
+              size: '{{ product.sizes[0] }}',
+              qty: 1
+            })">
+            ADD TO BAG
+          </button>
+          <button class="btn-card-action btn-buy-now" onclick="buyNow({
+              slug: '{{ product.slug }}',
+              title: '{{ product.title }}',
+              price: {{ product.sale_price_pkr }},
+              image: '{{ product.colors[0].image }}',
+              color: '{{ product.colors[0].name }}',
+              size: '{{ product.sizes[0] }}',
+              qty: 1
+            })">
+            BUY NOW
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Style It Your Way (Lookbook Bundle) -->
+<section class="lookbook-section">
+  <div class="section-header">
+    <h3 class="section-title">Style It Your Way</h3>
+    <p class="section-subtitle">Complete your celebration ensemble with handcrafted velvet potlis and pure silk dupattas
+    </p>
+  </div>
+
+  <div class="lookbook-strip">
+    <div class="lookbook-item">
+      <img src="/static/images/anarkali-peach.jpg" alt="Peach Anarkali" />
+      <div>
+        <div class="lookbook-name">Peach Anarkali</div>
+        <div class="lookbook-price" data-price-pkr="23999">Rs. 23,999</div>
+      </div>
+    </div>
+
+    <span class="lookbook-plus">+</span>
+
+    <div class="lookbook-item">
+      <img src="/static/images/saree-champagne.jpg" alt="Champagne Tissue Saree" />
+      <div>
+        <div class="lookbook-name">Organza Dupatta</div>
+        <div class="lookbook-price" data-price-pkr="8999">Rs. 8,999</div>
+      </div>
+    </div>
+
+    <span class="lookbook-plus">+</span>
+
+    <div class="lookbook-item">
+      <img src="/static/images/potli-gold.jpg" alt="Zari Potli" />
+      <div>
+        <div class="lookbook-name">Zari Velvet Potli</div>
+        <div class="lookbook-price" data-price-pkr="2499">Rs. 2,499</div>
+      </div>
+    </div>
+
+    <button class="btn-bundle" onclick="addLookbookBundle()">
+      ADD ENTIRE LOOK TO BAG
+    </button>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  function filterTab(category, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('#homepage-products-grid .product-card');
+    cards.forEach(card => {
+      const cats = (card.getAttribute('data-category') || '').toLowerCase().split(/\s+/);
+      if (category === 'all' || cats.includes(category.toLowerCase())) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+{% endblock %}

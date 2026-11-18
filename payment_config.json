@@ -1,0 +1,24 @@
+{
+  "bank_transfer": {
+    "enabled": true,
+    "title": "Bank Transfer",
+    "account_holder": "Muhammad Jumma",
+    "iban": "PK41UNIL0109000415148702",
+    "bank_name": "United Bank Limited (UBL)",
+    "instructions": "Transfer the total order amount to our official business bank account. After payment, enter your Transaction ID (TID) below and upload your payment screenshot/receipt. Your order will be manually verified by our team before confirmation."
+  },
+  "easypaisa": {
+    "enabled": true,
+    "title": "Easypaisa",
+    "account_holder": "Muhammad Jumma",
+    "account_number": "03156045403",
+    "instructions": "Send the total amount to our Easypaisa wallet via your Easypaisa Mobile App or OTC agent. Enter the 3737 SMS Transaction ID (TID) below and upload your payment screenshot. Our team will manually verify the payment to confirm your order."
+  },
+  "jazzcash": {
+    "enabled": true,
+    "title": "JazzCash",
+    "account_holder": "Muhammad Jumma",
+    "account_number": "03081755403",
+    "instructions": "Send the total amount to our JazzCash account via your JazzCash App or retailer. Enter the 8558 SMS Transaction ID (TID) below and upload your payment screenshot. Payment will be manually verified by our team prior to order fulfillment."
+  }
+}

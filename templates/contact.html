@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Concierge | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner">
+  <span style="font-size: 11px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase;">International Client Services</span>
+  <h2 style="margin-top: 6px;">Connect with Our VIP Concierge</h2>
+  <p>Assisting patrons across Pakistan, UAE, UK, USA, Saudia, and worldwide</p>
+</div>
+
+<div class="contact-container contact-grid">
+  <!-- Contact Info -->
+  <div>
+    <h3 style="font-family: var(--font-serif); font-size: 24px; color: var(--color-burgundy); margin-bottom: 20px;">Private Consultation</h3>
+    <p style="font-size: 14px; color: var(--color-text-dark); line-height: 1.8; margin-bottom: 24px;">
+      Our bridal stylists and customer care specialists are available 7 days a week to assist with custom sizing, fabric selection, order tracking, and 100% advance payment verification.
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; font-size: 14px;">
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <span style="font-size: 20px;">💬</span>
+        <div>
+          <strong>WhatsApp VIP Hotline:</strong><br />
+          <a href="https://wa.me/923001234567" style="color: var(--color-burgundy); font-weight: 600;">+92 300 1234567 (Instant Response)</a>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <span style="font-size: 20px;">✉️</span>
+        <div>
+          <strong>Client Inquiries & Orders:</strong><br />
+          <a href="mailto:concierge@jummacouturebynoman.com" style="color: var(--color-burgundy); font-weight: 600;">concierge@jummacouturebynoman.com</a>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <span style="font-size: 20px;">📍</span>
+        <div>
+          <strong>Flagship Atelier:</strong><br />
+          <span>Jumma Couture by Noman, Suite 14, Royal Palms Boulevard, Lahore, Pakistan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="checkout-card" style="padding: 30px;">
+    <h3 class="checkout-section-title">Send a Message</h3>
+    {% if success %}
+    <div style="background: #E8F5E9; color: #1B5E20; padding: 12px; border-radius: 4px; font-size: 13px; margin-bottom: 16px;">
+      Thank you for your message. Our private concierge will reply to your inquiry within 4 hours.
+    </div>
+    {% endif %}
+
+    <form action="/contact" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" class="form-control" placeholder="e.g. Zainab" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" name="email" class="form-control" placeholder="name@example.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone / WhatsApp *</label>
+          <input type="tel" name="phone" class="form-control" placeholder="+92 300 1234567" required />
+        </div>
+        <div class="form-group">
+          <label>Country of Residence *</label>
+          <input type="text" name="country" class="form-control" placeholder="e.g. United Arab Emirates" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Inquiry Topic *</label>
+        <select name="subject" class="form-control">
+          <option>Bridal Consultation & Custom Sizing</option>
+          <option>Order Tracking & Advance Payment</option>
+          <option>International Shipping & Customs</option>
+          <option>General Inquiries</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea name="message" class="form-control" rows="4" placeholder="How may our concierge assist you?" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-checkout" style="padding: 14px; margin-top: 10px;">
+        SUBMIT INQUIRY
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

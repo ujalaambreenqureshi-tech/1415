@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Track Your Order | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner">
+  <h2>Order Tracking & Verification</h2>
+  <p>Live fulfillment tracking connected with Shopify & international express carriers</p>
+</div>
+
+<div style="max-width: 900px; margin: 40px auto 80px; padding: 0 24px;">
+  <!-- Lookup Form -->
+  <div class="checkout-card" style="margin-bottom: 30px;">
+    <form action="/track-order" method="GET" style="display: flex; gap: 14px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 250px;">
+        <label style="font-size: 12px; font-weight: 700; text-transform: uppercase;">Order Number</label>
+        <input type="text" name="order" class="form-control" style="margin-top: 6px;" placeholder="e.g. HRT-2026-9481" value="{{ order_number or '' }}" required />
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <label style="font-size: 12px; font-weight: 700; text-transform: uppercase;">Customer Email</label>
+        <input type="email" name="email" class="form-control" style="margin-top: 6px;" placeholder="e.g. client@example.com" value="{{ email or '' }}" />
+      </div>
+      <div style="display: flex; align-items: flex-end;">
+        <button type="submit" class="btn-primary" style="padding: 13px 28px;">TRACK ORDER</button>
+      </div>
+    </form>
+  </div>
+
+  {% if order %}
+  <!-- Live Order Status Card -->
+  <div class="checkout-card">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--color-border); padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <span style="font-size: 12px; color: var(--color-gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">Confirmed Luxury Order</span>
+        <h3 style="font-family: var(--font-serif); font-size: 26px; color: var(--color-burgundy); margin-top: 2px;">{{ order.order_number }}</h3>
+        <span style="font-size: 12px; color: var(--color-text-muted);">Placed on {{ order.created_at }}</span>
+      </div>
+      <div style="text-align: right;">
+        <span style="background: #E8F5E9; color: #1B5E20; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 12px; display: inline-block;">
+          ✓ 100% Full Advance Verified
+        </span>
+        <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 6px;">
+          Gateway: <strong>{{ order.payment_method|upper }}</strong> | Ref: {{ order.transaction_id }}
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-Step Progress Tracker -->
+    <div style="margin: 35px 0;">
+      <div style="display: flex; justify-content: space-between; position: relative; margin-bottom: 30px;">
+        <div style="position: absolute; top: 18px; left: 5%; right: 5%; height: 3px; background: #EADBCE; z-index: 1;"></div>
+        <div style="position: absolute; top: 18px; left: 5%; width: 50%; height: 3px; background: var(--color-gold); z-index: 2;"></div>
+
+        <!-- Step 1 -->
+        <div style="text-align: center; position: relative; z-index: 3;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--color-gold); color: #111; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">✓</div>
+          <div style="font-size: 12px; font-weight: 700;">Order Placed</div>
+          <div style="font-size: 10px; color: var(--color-text-muted);">100% Advance Received</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="text-align: center; position: relative; z-index: 3;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--color-gold); color: #111; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">✓</div>
+          <div style="font-size: 12px; font-weight: 700;">Shopify Synced</div>
+          <div style="font-size: 10px; color: var(--color-text-muted);">Inventory Reserved</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="text-align: center; position: relative; z-index: 3;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--color-cream); border: 2px solid var(--color-gold); color: var(--color-burgundy); font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">3</div>
+          <div style="font-size: 12px; font-weight: 700;">Artisan Quality Check</div>
+          <div style="font-size: 10px; color: var(--color-text-muted);">Couture Inspection</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="text-align: center; position: relative; z-index: 3;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #EADBCE; color: #777; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px;">4</div>
+          <div style="font-size: 12px; font-weight: 700;">Express Dispatch</div>
+          <div style="font-size: 10px; color: var(--color-text-muted);">{{ order.carrier or 'DHL Express' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items & Shipping Breakdown -->
+    <div style="background: #FAF7F2; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 20px; margin-top: 24px;">
+      <h4 style="font-size: 14px; font-weight: 700; text-transform: uppercase; margin-bottom: 14px; color: var(--color-burgundy);">
+        Order Items ({{ items|length }})
+      </h4>
+      {% for item in items %}
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #EADBCE; padding: 10px 0;">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <img src="/static/images/{{ item.image }}" alt="{{ item.title }}" style="width: 50px; height: 60px; object-fit: cover; border-radius: 3px;" />
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">{{ item.title }}</div>
+            <div style="font-size: 11px; color: var(--color-text-muted);">Color: <strong>{{ item.color }}</strong> | Size: <strong>{{ item.size }}</strong> | Qty: {{ item.qty }}</div>
+          </div>
+        </div>
+        <div style="font-weight: 700; font-size: 14px; color: var(--color-burgundy);">
+          Rs. {{ "{:,}".format(item.price * item.qty) }}
+        </div>
+      </div>
+      {% endfor %}
+
+      <div style="margin-top: 16px; padding-top: 12px; border-top: 2px dashed #EADBCE; display: flex; justify-content: space-between; font-weight: 700; font-size: 16px;">
+        <span>100% Advance Total Paid:</span>
+        <span style="color: var(--color-burgundy);">Rs. {{ "{:,}".format(order.total_amount|int) }}</span>
+      </div>
+    </div>
+
+    <!-- Shipping Destination Details -->
+    <div style="margin-top: 20px; font-size: 13px; color: var(--color-text-muted); line-height: 1.7;">
+      <strong>Delivery Destination:</strong> {{ order.customer_name }} | {{ order.address }}, {{ order.city }}, {{ order.country }} ({{ order.postal_code }})<br />
+      <strong>Contact:</strong> {{ order.customer_phone }} | {{ order.customer_email }}<br />
+      <strong>Shopify Sync ID:</strong> <code>{{ order.shopify_order_id or 'SHP-STAGING-VERIFIED' }}</code>
+    </div>
+  </div>
+  {% elif order_number %}
+  <div class="checkout-card" style="text-align: center; padding: 40px;">
+    <p style="font-size: 32px; margin-bottom: 12px;">🔍</p>
+    <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--color-burgundy); margin-bottom: 8px;">Order Not Found</h3>
+    <p style="color: var(--color-text-muted); font-size: 14px;">We could not locate order <strong>{{ order_number }}</strong>. Please check the order reference from your email receipt or contact our VIP concierge.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+

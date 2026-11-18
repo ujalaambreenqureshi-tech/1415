@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}My Wishlist | Jumma Couture by Noman{% endblock %}
+
+{% block content %}
+<div class="page-hero-banner">
+  <h2>My Curated Wishlist</h2>
+  <p>Your private collection of desired silhouettes and heirloom jewels</p>
+</div>
+
+<div class="site-container" style="margin: 40px auto 80px;">
+  <div class="products-grid" id="wishlist-grid">
+    <!-- Populated by JS based on localStorage wishlist -->
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+async function renderWishlistPage() {
+  const grid = document.getElementById('wishlist-grid');
+  if (!grid) return;
+
+  if (Heritage.wishlist.length === 0) {
+    grid.innerHTML = `
+      <div class="checkout-card" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+        <p style="font-size: 36px; margin-bottom: 12px;">♡</p>
+        <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--color-burgundy); margin-bottom: 8px;">Your Wishlist is Empty</h3>
+        <p style="color: var(--color-text-muted); font-size: 14px; margin-bottom: 24px;">Explore our catalog and click the heart icon on any outfit to save it here.</p>
+        <a href="/shop" class="btn-primary">Browse Collections</a>
+      </div>
+    `;
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/products');
+    const allProducts = await resp.json();
+    const saved = allProducts.filter(p => Heritage.wishlist.includes(p.slug));
+
+    if (saved.length === 0) {
+      Heritage.wishlist = [];
+      localStorage.setItem('heritage_wishlist', '[]');
+      renderWishlistPage();
+      return;
+    }
+
+    let html = '';
+    saved.forEach(product => {
+      html += `
+        <div class="product-card">
+          <button class="wishlist-toggle active" onclick="toggleWishlist('${product.slug}', '${product.title}'); renderWishlistPage();">
+            ♥
+          </button>
+
+          <a href="/product/${product.slug}" class="product-img-wrap">
+            <img src="/static/images/${product.colors[0].image}" alt="${product.title}" />
+          </a>
+
+          <div class="product-details">
+            <a href="/product/${product.slug}">
+              <h4 class="product-title">${product.title}</h4>
+            </a>
+            <p class="product-subtitle">${product.subtitle}</p>
+
+            <div class="product-price-row">
+              <span class="sale-price" data-price-pkr="${product.sale_price_pkr}">${formatPrice(product.sale_price_pkr)}</span>
+              <span class="base-price" data-price-pkr="${product.base_price_pkr}">${formatPrice(product.base_price_pkr)}</span>
+            </div>
+
+            <button 
+              class="btn-primary" 
+              style="margin-top: 14px; width: 100%; padding: 10px; font-size: 11px;"
+              onclick="addToCart({
+                slug: '${product.slug}',
+                title: '${product.title}',
+                price: ${product.sale_price_pkr},
+                image: '${product.colors[0].image}',
+                color: '${product.colors[0].name}',
+                size: '${product.sizes[0]}',
+                qty: 1
+              })">
+              MOVE TO BAG
+            </button>
+          </div>
+        </div>
+      `;
+    });
+    grid.innerHTML = html;
+  } catch (e) {
+    grid.innerHTML = '<p>Error loading wishlist items.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderWishlistPage();
+});
+</script>
+{% endblock %}
+
